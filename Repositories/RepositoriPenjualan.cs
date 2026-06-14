@@ -170,7 +170,11 @@ namespace SIKOPI_DOPY_MVC.Repositories
                 using (var cmdRiwayat = new NpgsqlCommand(sqlRiwayatStok, conn, dbTransaction))
                 {
                     cmdRiwayat.Parameters.AddWithValue("@id_roasted", pembelian.IdRoasted);
-                    cmdRiwayat.Parameters.AddWithValue("@kategori", "ROAST_BEAN");
+
+                    // WAJIB sesuai constraint ck_riwayat_kategori:
+                    // hanya boleh GREEN_BEAN atau ROASTED_BEAN.
+                    cmdRiwayat.Parameters.AddWithValue("@kategori", "ROASTED_BEAN");
+
                     cmdRiwayat.Parameters.AddWithValue("@arah", "KELUAR");
                     cmdRiwayat.Parameters.AddWithValue("@jumlah", pembelian.JumlahGram);
                     cmdRiwayat.Parameters.AddWithValue("@satuan", "gram");

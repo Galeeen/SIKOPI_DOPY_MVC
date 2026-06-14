@@ -1,0 +1,177 @@
+﻿namespace SIKOPI_DOPY_MVC.Views
+{
+    partial class FormRiwayatProduksi
+    {
+        /// <summary>
+        /// Required designer variable.
+        /// </summary>
+        private System.ComponentModel.IContainer components = null;
+
+        /// <summary>
+        /// Clean up any resources being used.
+        /// </summary>
+        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing && (components != null))
+            {
+                components.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+
+        #region Windows Form Designer generated code
+
+        /// <summary>
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
+        /// </summary>
+        private void InitializeComponent()
+        {
+            pnlHeader = new Panel();
+            lblSubJudul = new Label();
+            lblJudul = new Label();
+            pnlRingkasan = new Panel();
+            lblTotalAktivitas = new Label();
+            lblJumlahBatch = new Label();
+            lblRoastBeanMasuk = new Label();
+            lblGreenBeanKeluar = new Label();
+            dgvRiwayatProduksi = new DataGridView();
+            pnlHeader.SuspendLayout();
+            pnlRingkasan.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dgvRiwayatProduksi).BeginInit();
+            SuspendLayout();
+            // 
+            // pnlHeader
+            // 
+            pnlHeader.Controls.Add(lblSubJudul);
+            pnlHeader.Controls.Add(lblJudul);
+            pnlHeader.Dock = DockStyle.Top;
+            pnlHeader.Location = new Point(0, 0);
+            pnlHeader.Name = "pnlHeader";
+            pnlHeader.Size = new Size(982, 90);
+            pnlHeader.TabIndex = 0;
+            // 
+            // lblSubJudul
+            // 
+            lblSubJudul.AutoSize = true;
+            lblSubJudul.Location = new Point(27, 55);
+            lblSubJudul.Name = "lblSubJudul";
+            lblSubJudul.Size = new Size(240, 20);
+            lblSubJudul.TabIndex = 1;
+            lblSubJudul.Text = "Riwayat stok dan aktivitas produksi";
+            // 
+            // lblJudul
+            // 
+            lblJudul.AutoSize = true;
+            lblJudul.Location = new Point(24, 14);
+            lblJudul.Name = "lblJudul";
+            lblJudul.Size = new Size(61, 20);
+            lblJudul.TabIndex = 0;
+            lblJudul.Text = "Riwayat";
+            // 
+            // pnlRingkasan
+            // 
+            pnlRingkasan.Controls.Add(lblTotalAktivitas);
+            pnlRingkasan.Controls.Add(lblJumlahBatch);
+            pnlRingkasan.Controls.Add(lblRoastBeanMasuk);
+            pnlRingkasan.Controls.Add(lblGreenBeanKeluar);
+            pnlRingkasan.Dock = DockStyle.Top;
+            pnlRingkasan.Location = new Point(0, 90);
+            pnlRingkasan.Name = "pnlRingkasan";
+            pnlRingkasan.Size = new Size(982, 120);
+            pnlRingkasan.TabIndex = 1;
+            // 
+            // lblTotalAktivitas
+            // 
+            lblTotalAktivitas.AutoSize = true;
+            lblTotalAktivitas.BorderStyle = BorderStyle.FixedSingle;
+            lblTotalAktivitas.Location = new Point(684, 20);
+            lblTotalAktivitas.Name = "lblTotalAktivitas";
+            lblTotalAktivitas.Size = new Size(100, 22);
+            lblTotalAktivitas.TabIndex = 3;
+            lblTotalAktivitas.Text = "Aktivitas\\r\\n0";
+            lblTotalAktivitas.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // lblJumlahBatch
+            // 
+            lblJumlahBatch.AutoSize = true;
+            lblJumlahBatch.BorderStyle = BorderStyle.FixedSingle;
+            lblJumlahBatch.Location = new Point(464, 20);
+            lblJumlahBatch.Name = "lblJumlahBatch";
+            lblJumlahBatch.Size = new Size(81, 22);
+            lblJumlahBatch.TabIndex = 2;
+            lblJumlahBatch.Text = "Batch\\r\\n0";
+            lblJumlahBatch.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // lblRoastBeanMasuk
+            // 
+            lblRoastBeanMasuk.AutoSize = true;
+            lblRoastBeanMasuk.BorderStyle = BorderStyle.FixedSingle;
+            lblRoastBeanMasuk.Location = new Point(244, 20);
+            lblRoastBeanMasuk.Name = "lblRoastBeanMasuk";
+            lblRoastBeanMasuk.Size = new Size(140, 22);
+            lblRoastBeanMasuk.TabIndex = 1;
+            lblRoastBeanMasuk.Text = "lblRoastBeanMasuk";
+            lblRoastBeanMasuk.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // lblGreenBeanKeluar
+            // 
+            lblGreenBeanKeluar.AutoSize = true;
+            lblGreenBeanKeluar.BorderStyle = BorderStyle.FixedSingle;
+            lblGreenBeanKeluar.Location = new Point(24, 20);
+            lblGreenBeanKeluar.Name = "lblGreenBeanKeluar";
+            lblGreenBeanKeluar.Size = new Size(131, 22);
+            lblGreenBeanKeluar.TabIndex = 0;
+            lblGreenBeanKeluar.Text = "GB Keluar\\r\\n0 Kg";
+            lblGreenBeanKeluar.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // dgvRiwayatProduksi
+            // 
+            dgvRiwayatProduksi.AllowUserToAddRows = false;
+            dgvRiwayatProduksi.AllowUserToDeleteRows = false;
+            dgvRiwayatProduksi.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dgvRiwayatProduksi.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvRiwayatProduksi.Dock = DockStyle.Fill;
+            dgvRiwayatProduksi.Location = new Point(0, 210);
+            dgvRiwayatProduksi.MultiSelect = false;
+            dgvRiwayatProduksi.Name = "dgvRiwayatProduksi";
+            dgvRiwayatProduksi.ReadOnly = true;
+            dgvRiwayatProduksi.RowHeadersVisible = false;
+            dgvRiwayatProduksi.RowHeadersWidth = 51;
+            dgvRiwayatProduksi.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgvRiwayatProduksi.Size = new Size(982, 343);
+            dgvRiwayatProduksi.TabIndex = 2;
+            // 
+            // FormRiwayatProduksi
+            // 
+            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(982, 553);
+            Controls.Add(dgvRiwayatProduksi);
+            Controls.Add(pnlRingkasan);
+            Controls.Add(pnlHeader);
+            Name = "FormRiwayatProduksi";
+            StartPosition = FormStartPosition.CenterScreen;
+            Text = "Riwayat Produksi";
+            pnlHeader.ResumeLayout(false);
+            pnlHeader.PerformLayout();
+            pnlRingkasan.ResumeLayout(false);
+            pnlRingkasan.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)dgvRiwayatProduksi).EndInit();
+            ResumeLayout(false);
+        }
+
+        #endregion
+
+        private Panel pnlHeader;
+        private Label lblSubJudul;
+        private Label lblJudul;
+        private Panel pnlRingkasan;
+        private Label lblTotalAktivitas;
+        private Label lblJumlahBatch;
+        private Label lblRoastBeanMasuk;
+        private Label lblGreenBeanKeluar;
+        private DataGridView dgvRiwayatProduksi;
+    }
+}

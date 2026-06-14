@@ -26,6 +26,12 @@ namespace SIKOPI_DOPY_MVC.Views
             btnEtalase.Click -= btnEtalase_Click;
             btnEtalase.Click += btnEtalase_Click;
 
+            btnRiwayat.Click -= btnRiwayat_Click;
+            btnRiwayat.Click += btnRiwayat_Click;
+
+            btnManajemenUser.Click -= btnManajemenUser_Click;
+            btnManajemenUser.Click += btnManajemenUser_Click;
+
             btnKeluar.Click -= btnKeluar_Click;
             btnKeluar.Click += btnKeluar_Click;
 
@@ -65,6 +71,16 @@ namespace SIKOPI_DOPY_MVC.Views
         private void btnEtalase_Click(object? sender, EventArgs e)
         {
             TampilkanFormDiPanel(new FormEtalaseToko(_penggunaLogin));
+        }
+
+        private void btnRiwayat_Click(object? sender, EventArgs e)
+        {
+            TampilkanFormDiPanel(new FormRiwayatAdmin());
+        }
+
+        private void btnManajemenUser_Click(object? sender, EventArgs e)
+        {
+            TampilkanFormDiPanel(new FormManajemenUserAdmin(_penggunaLogin));
         }
 
         private void btnKeluar_Click(object? sender, EventArgs e)

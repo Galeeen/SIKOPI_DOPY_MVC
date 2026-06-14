@@ -104,6 +104,7 @@
             btnRiwayat.TabIndex = 4;
             btnRiwayat.Text = "Riwayat";
             btnRiwayat.UseVisualStyleBackColor = true;
+            btnRiwayat.Click += btnRiwayat_Click;
             // 
             // btnEtalase
             // 

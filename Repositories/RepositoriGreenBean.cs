@@ -19,29 +19,28 @@ namespace SIKOPI_DOPY_MVC.Repositories
 
             string sql = @"
                 SELECT
-                    gb.id_biji_mentah,
-                    gb.nama_biji,
-                    gb.asal_daerah,
-                    jb.nama AS jenis,
-                    gb.ketinggian_mdpl,
-                    mp.nama AS metode_proses,
-                    gb.tingkat_kualitas,
-                    gb.stok_kg,
-                    gb.harga_per_kg,
-                    gb.tanggal_panen
-                FROM biji_kopi_mentah gb
-                JOIN jenis_biji_kopi_mentah jb
-                    ON gb.id_jenis_biji_kopi_mentah = jb.id_jenis_biji_kopi_mentah
-                JOIN metode_proses mp
-                    ON gb.id_metode_proses = mp.id_metode_proses
-                WHERE gb.is_aktif = TRUE
-                ORDER BY gb.id_biji_mentah DESC;
+                    rb.id_roasted,
+                    br.kode_batch,
+                    rb.nama_produk,
+                    br.level_roasting,
+                    br.hasil_roasting_gram,
+                    rb.stok_gram,
+                    rb.harga_per_gram,
+                    rb.status_harga,
+                    br.tanggal_batch,
+                    COALESCE(rb.catatan, '') AS catatan
+                FROM biji_kopi_roasted rb
+                JOIN batch_roasting br
+                    ON rb.id_batch = br.id_batch
+                WHERE rb.is_aktif = TRUE
+                  AND br.is_aktif = TRUE
+                ORDER BY rb.id_roasted DESC;
             ";
 
-            using var cmd = new NpgsqlCommand(sql, conn);
+            using var cmd = new Npgsql.NpgsqlCommand(sql, conn);
 
             var dt = new DataTable();
-            using var adapter = new NpgsqlDataAdapter(cmd);
+            using var adapter = new Npgsql.NpgsqlDataAdapter(cmd);
             adapter.Fill(dt);
 
             return dt;

@@ -12,9 +12,11 @@ namespace SIKOPI_DOPY_MVC.Views
         private readonly Pengguna _penggunaLogin;
         private readonly BatchRoastingController _batchRoastingController;
         private readonly IRepositoriLookup _repositoriLookup;
+
         private readonly int? _idBatch;
 
         private string _kodeBatchLama = "";
+        private int _idBijiMentahLama = 0;
 
         public FormDialogBatchRoasting(Pengguna penggunaLogin)
         {
@@ -58,20 +60,23 @@ namespace SIKOPI_DOPY_MVC.Views
 
         private void MuatComboBox()
         {
+            cmbGreenBean.DataSource = null;
             cmbGreenBean.DisplayMember = "Nama";
             cmbGreenBean.ValueMember = "Id";
             cmbGreenBean.DataSource = _repositoriLookup.AmbilGreenBeanAktifDetail();
 
             cmbLevelRoasting.Items.Clear();
-            cmbLevelRoasting.Items.Add("Light Roast");
-            cmbLevelRoasting.Items.Add("Medium Roast");
-            cmbLevelRoasting.Items.Add("Medium Dark Roast");
-            cmbLevelRoasting.Items.Add("Dark Roast");
+            cmbLevelRoasting.Items.Add("Light");
+            cmbLevelRoasting.Items.Add("Medium");
+            cmbLevelRoasting.Items.Add("Medium Dark");
+            cmbLevelRoasting.Items.Add("Dark");
+
+            cmbLevelRoasting.DropDownStyle = ComboBoxStyle.DropDownList;
 
             if (cmbLevelRoasting.Items.Count > 0)
-                cmbLevelRoasting.SelectedIndex = 1;
+                cmbLevelRoasting.SelectedIndex = 0;
 
-            TampilkanInfoGreenBean();
+            TampilkanInfoGreenBeanTerpilih();
         }
 
         private void AturModeForm()
@@ -79,19 +84,21 @@ namespace SIKOPI_DOPY_MVC.Views
             if (_idBatch.HasValue)
             {
                 this.Text = "Edit Batch Roasting";
-                btnSimpan.Text = "Update";
+
+                // Saat edit, green bean tidak boleh diubah.
+                cmbGreenBean.Enabled = false;
 
                 MuatDataEdit(_idBatch.Value);
             }
             else
             {
                 this.Text = "Tambah Batch Roasting";
-                btnSimpan.Text = "Simpan";
 
-                txtJumlahBijiDipakaiKg.Text = "0";
+                cmbGreenBean.Enabled = true;
+                dtpTanggalBatch.Value = DateTime.Now;
+                txtJumlahBijiDipakaiGram.Text = "0";
                 txtHasilRoastingGram.Text = "0";
                 txtCatatan.Text = "";
-                dtpTanggalBatch.Value = DateTime.Now;
             }
         }
 
@@ -100,112 +107,121 @@ namespace SIKOPI_DOPY_MVC.Views
             BatchRoasting batch = _batchRoastingController.AmbilBatchById(idBatch);
 
             _kodeBatchLama = batch.KodeBatch;
+            _idBijiMentahLama = batch.IdBijiMentah;
 
-            txtJumlahBijiDipakaiKg.Text = batch.JumlahBijiDipakaiKg.ToString(CultureInfo.InvariantCulture);
+            txtJumlahBijiDipakaiGram.Text = batch.JumlahBijiDipakaiGram.ToString();
             txtHasilRoastingGram.Text = batch.HasilRoastingGram.ToString(CultureInfo.InvariantCulture);
-            txtCatatan.Text = batch.Catatan;
-
-            cmbGreenBean.SelectedValue = batch.IdBijiMentah;
-            cmbGreenBean.Enabled = false;
-
             cmbLevelRoasting.Text = batch.LevelRoasting;
             dtpTanggalBatch.Value = batch.TanggalBatch;
+            txtCatatan.Text = batch.Catatan;
 
-            lblInfoGreenBean.Text = "Green bean tidak bisa diganti saat edit.";
+            PilihGreenBeanDiCombo(_idBijiMentahLama);
+
+            lblInfoGreenBean.Text = "Green bean tidak bisa diubah saat edit batch.";
         }
 
-        private void cmbGreenBean_SelectedIndexChanged(object sender, EventArgs e)
+        private void PilihGreenBeanDiCombo(int idBijiMentah)
         {
-            TampilkanInfoGreenBean();
+            for (int i = 0; i < cmbGreenBean.Items.Count; i++)
+            {
+                if (cmbGreenBean.Items[i] is GreenBeanLookupItem item && item.Id == idBijiMentah)
+                {
+                    cmbGreenBean.SelectedIndex = i;
+                    return;
+                }
+            }
+
+           
+            cmbGreenBean.SelectedIndex = -1;
         }
 
-        private void TampilkanInfoGreenBean()
+        private void cmbGreenBean_SelectedIndexChanged(object? sender, EventArgs e)
         {
-            if (cmbGreenBean.SelectedItem is GreenBeanLookupItem item)
-            {
-                lblInfoGreenBean.Text =
-                    $"Tersedia: {item.StokKg:0.##} Kg • {item.AsalDaerah} • {item.MetodeProses}";
-            }
-            else
-            {
-                lblInfoGreenBean.Text = "Tersedia: -";
-            }
+            TampilkanInfoGreenBeanTerpilih();
         }
 
-        private void btnSimpan_Click(object sender, EventArgs e)
+        private void TampilkanInfoGreenBeanTerpilih()
+        {
+            if (cmbGreenBean.SelectedItem is not GreenBeanLookupItem item)
+            {
+                lblInfoGreenBean.Text = "-";
+                return;
+            }
+
+            lblInfoGreenBean.Text =
+                $"Stok: {item.StokKg.ToString("0.##", CultureInfo.InvariantCulture)} kg | " +
+                $"Asal: {item.AsalDaerah} | " +
+                $"Proses: {item.MetodeProses}";
+        }
+
+        private void btnSimpan_Click(object? sender, EventArgs e)
         {
             try
             {
-                if (cmbGreenBean.SelectedValue == null)
-                    throw new Exception("Green bean wajib dipilih.");
+                if (cmbGreenBean.SelectedItem == null && !_idBatch.HasValue)
+                {
+                    MessageBox.Show(
+                        "Green bean wajib dipilih.",
+                        "Validasi",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Warning
+                    );
+                    return;
+                }
 
-                if (cmbLevelRoasting.SelectedItem == null)
-                    throw new Exception("Roast level wajib dipilih.");
+                int idBijiMentah;
 
-                var batch = new BatchRoasting
+                if (_idBatch.HasValue)
+                {
+                    idBijiMentah = _idBijiMentahLama;
+                }
+                else
+                {
+                    GreenBeanLookupItem greenBeanDipilih = (GreenBeanLookupItem)cmbGreenBean.SelectedItem;
+                    idBijiMentah = greenBeanDipilih.Id;
+                }
+
+                BatchRoasting batch = new BatchRoasting
                 {
                     Id = _idBatch ?? 0,
-                    IdBijiMentah = Convert.ToInt32(cmbGreenBean.SelectedValue),
-
-                    // Tambah: kode dibuat otomatis di controller
-                    // Edit: pakai kode lama dari database
-                    KodeBatch = _idBatch.HasValue ? _kodeBatchLama : "",
-
-                    JumlahBijiDipakaiKg = AmbilDecimal(
-                        txtJumlahBijiDipakaiKg.Text,
-                        "Green bean dipakai"
-                    ),
-
-                    HasilRoastingGram = AmbilDecimal(
-                        txtHasilRoastingGram.Text,
-                        "Hasil roast bean"
-                    ),
-
-                    LevelRoasting = cmbLevelRoasting.Text,
-                    TanggalBatch = dtpTanggalBatch.Value.Date,
+                    IdBijiMentah = idBijiMentah,
+                    IdPengguna = _penggunaLogin.Id,
+                    KodeBatch = _kodeBatchLama,
+                    JumlahBijiDipakaiGram = AmbilDecimal(txtJumlahBijiDipakaiGram.Text),
+                    HasilRoastingGram = AmbilDecimal(txtHasilRoastingGram.Text),
+                    LevelRoasting = cmbLevelRoasting.SelectedItem?.ToString() ?? "",
+                    TanggalBatch = dtpTanggalBatch.Value,
                     Catatan = txtCatatan.Text.Trim()
                 };
 
                 if (_idBatch.HasValue)
                 {
                     _batchRoastingController.UbahBatch(batch);
-
-                    MessageBox.Show(
-                        "Batch roasting berhasil diubah.",
-                        "Berhasil",
-                        MessageBoxButtons.OK,
-                        MessageBoxIcon.Information
-                    );
                 }
                 else
                 {
                     _batchRoastingController.TambahBatch(batch);
-
-                    MessageBox.Show(
-                        "Batch roasting berhasil ditambahkan.",
-                        "Berhasil",
-                        MessageBoxButtons.OK,
-                        MessageBoxIcon.Information
-                    );
                 }
 
-                this.DialogResult = DialogResult.OK;
-                this.Close();
+                MessageBox.Show(
+                    "Data batch roasting berhasil disimpan.",
+                    "Berhasil",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Information
+                );
+
+                DialogResult = DialogResult.OK;
+                Close();
             }
             catch (Exception ex)
             {
                 MessageBox.Show(
                     ex.Message,
-                    "Gagal Menyimpan",
+                    "Gagal Simpan Batch Roasting",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error
                 );
             }
-        }
-
-        private void btnBatal_Click(object sender, EventArgs e)
-        {
-            this.Close();
         }
 
         private decimal AmbilDecimal(string teks, string namaField)
@@ -225,6 +241,30 @@ namespace SIKOPI_DOPY_MVC.Views
                 throw new Exception($"{namaField} harus lebih dari 0.");
 
             return nilai;
+        }
+
+        private decimal AmbilDecimal(string teks)
+        {
+            if (string.IsNullOrWhiteSpace(teks))
+                return 0;
+
+            teks = teks.Trim().Replace(",", ".");
+
+            if (!decimal.TryParse(
+                teks,
+                System.Globalization.NumberStyles.Any,
+                System.Globalization.CultureInfo.InvariantCulture,
+                out decimal hasil))
+            {
+                throw new Exception("Input angka tidak valid.");
+            }
+
+            return hasil;
+        }
+
+        private void btnBatal_Click(object? sender, EventArgs e)
+        {
+            Close();
         }
     }
 }

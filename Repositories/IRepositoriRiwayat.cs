@@ -1,0 +1,12 @@
+﻿using System.Data;
+using SIKOPI_DOPY_MVC.Models;
+
+namespace SIKOPI_DOPY_MVC.Repositories
+{
+    public interface IRepositoriRiwayat
+    {
+        RingkasanRiwayat AmbilRingkasan();
+        DataTable AmbilRiwayatStok();
+        DataTable AmbilRiwayatPenjualan();
+    }
+}

@@ -10,7 +10,7 @@ namespace SIKOPI_DOPY_MVC.Models
         public int IdPengguna { get; set; }
 
         public string KodeBatch { get; set; } = "";
-        public decimal JumlahBijiDipakaiKg { get; set; }
+        public decimal JumlahBijiDipakaiGram { get; set; }
         public decimal HasilRoastingGram { get; set; }
         public string LevelRoasting { get; set; } = "";
         public DateTime TanggalBatch { get; set; } = DateTime.Now;

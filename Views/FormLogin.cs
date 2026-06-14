@@ -31,23 +31,40 @@ namespace SIKOPI_DOPY_MVC.Views
                     txtPassword.Text
                     );
 
-                if (pengguna.Peran != "Admin")
+
+             
+
+                if (pengguna.Peran == "Admin")
+                {
+                    FormUtamaAdmin formAdmin = new FormUtamaAdmin(pengguna);
+                    formAdmin.Show();
+                    Hide();
+                }
+                else if (pengguna.Peran == "Karyawan Produksi")
+                {
+                    FormUtamaProduksi formProduksi = new FormUtamaProduksi(pengguna);
+                    formProduksi.Show();
+                    Hide();
+                }
+                else if (pengguna.Peran == "Karyawan Penjual")
                 {
                     MessageBox.Show(
-                        "Untuk tahap ini hanya role Admin yang bisa masuk.",
-                        "Akses Ditolak",
+                        "Role Karyawan Penjual belum dibuat.",
+                        "Informasi",
                         MessageBoxButtons.OK,
-                        MessageBoxIcon.Warning
+                        MessageBoxIcon.Information
                     );
-
-                    return;
                 }
-
-                FormUtamaAdmin formUtamaAdmin = new FormUtamaAdmin(pengguna);
-                formUtamaAdmin.FormClosed += (s, args) => this.Close();
-
-                this.Hide();
-                formUtamaAdmin.Show();
+                else
+                {
+                    MessageBox.Show(
+                        "Role tidak dikenali: " + pengguna.Peran,
+                        "Gagal Login",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Error
+                    );
+                }
+               
 
             }
             catch (Exception ex)

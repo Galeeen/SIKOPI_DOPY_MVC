@@ -68,13 +68,21 @@ namespace SIKOPI_DOPY_MVC.Views
                 dgvBatchRoasting.Columns["kode_batch"].HeaderText = "KODE BATCH";
 
             if (dgvBatchRoasting.Columns.Contains("green_bean"))
+            {
                 dgvBatchRoasting.Columns["green_bean"].HeaderText = "GREEN BEAN";
+            }
 
-            if (dgvBatchRoasting.Columns.Contains("jumlah_biji_dipakai_kg"))
-                dgvBatchRoasting.Columns["jumlah_biji_dipakai_kg"].HeaderText = "DIPAKAI KG";
+            if (dgvBatchRoasting.Columns.Contains("jumlah_biji_dipakai_gram"))
+            {
+                dgvBatchRoasting.Columns["jumlah_biji_dipakai_gram"].HeaderText = "BIJI MASUK (GRAM)";
+                dgvBatchRoasting.Columns["jumlah_biji_dipakai_gram"].DefaultCellStyle.Format = "N0";
+            }
 
             if (dgvBatchRoasting.Columns.Contains("hasil_roasting_gram"))
-                dgvBatchRoasting.Columns["hasil_roasting_gram"].HeaderText = "HASIL GRAM";
+            {
+                dgvBatchRoasting.Columns["hasil_roasting_gram"].HeaderText = "BERAT KELUAR (GRAM)";
+                dgvBatchRoasting.Columns["hasil_roasting_gram"].DefaultCellStyle.Format = "N0";
+            }
 
             if (dgvBatchRoasting.Columns.Contains("level_roasting"))
                 dgvBatchRoasting.Columns["level_roasting"].HeaderText = "LEVEL ROASTING";

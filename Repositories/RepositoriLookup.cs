@@ -88,42 +88,36 @@ namespace SIKOPI_DOPY_MVC.Repositories
         }
         public List<GreenBeanLookupItem> AmbilGreenBeanAktifDetail()
         {
-            var hasil = new List<GreenBeanLookupItem>();
+            var daftarGreenBean = new List<GreenBeanLookupItem>();
 
             using var conn = KoneksiDB.GetConnection();
             conn.Open();
 
             string sql = @"
         SELECT
-            gb.id_biji_mentah,
-            gb.nama_biji,
-            gb.asal_daerah,
-            gb.stok_kg,
-            mp.nama AS metode_proses
-        FROM biji_kopi_mentah gb
-        JOIN metode_proses mp
-            ON gb.id_metode_proses = mp.id_metode_proses
-        WHERE gb.is_aktif = TRUE
-          AND gb.stok_kg > 0
-        ORDER BY gb.nama_biji ASC;
+            id_biji_mentah,
+            nama_biji,
+            stok_kg
+        FROM biji_kopi_mentah
+        WHERE is_aktif = TRUE
+          AND stok_kg > 0
+        ORDER BY nama_biji ASC;
     ";
 
-            using var cmd = new NpgsqlCommand(sql, conn);
+            using var cmd = new Npgsql.NpgsqlCommand(sql, conn);
             using var reader = cmd.ExecuteReader();
 
             while (reader.Read())
             {
-                hasil.Add(new GreenBeanLookupItem
+                daftarGreenBean.Add(new GreenBeanLookupItem
                 {
                     Id = Convert.ToInt32(reader["id_biji_mentah"]),
                     Nama = reader["nama_biji"].ToString() ?? "",
-                    AsalDaerah = reader["asal_daerah"].ToString() ?? "",
-                    StokKg = Convert.ToDecimal(reader["stok_kg"]),
-                    MetodeProses = reader["metode_proses"].ToString() ?? ""
+                    StokKg = Convert.ToDecimal(reader["stok_kg"])
                 });
             }
 
-            return hasil;
+            return daftarGreenBean;
         }
     }
 }

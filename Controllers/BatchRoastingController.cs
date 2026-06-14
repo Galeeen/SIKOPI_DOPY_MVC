@@ -33,8 +33,6 @@ namespace SIKOPI_DOPY_MVC.Controllers
         public void TambahBatch(BatchRoasting batch)
         {
             batch.IdPengguna = _idPenggunaLogin;
-
-            // Kode batch dibuat otomatis di sini, bukan dari form
             batch.KodeBatch = BuatKodeBatchOtomatis();
 
             ValidasiBatch(batch);
@@ -68,17 +66,34 @@ namespace SIKOPI_DOPY_MVC.Controllers
             if (batch.IdBijiMentah <= 0)
                 throw new Exception("Green bean wajib dipilih.");
 
-            if (string.IsNullOrWhiteSpace(batch.KodeBatch))
-                throw new Exception("Kode batch gagal dibuat otomatis.");
+            if (batch.IdPengguna <= 0)
+                throw new Exception("Pengguna tidak valid.");
 
-            if (batch.JumlahBijiDipakaiKg <= 0)
-                throw new Exception("Green bean dipakai harus lebih dari 0.");
+            if (batch.JumlahBijiDipakaiGram <= 0)
+                throw new Exception("Jumlah biji masuk harus lebih dari 0 gram.");
 
             if (batch.HasilRoastingGram <= 0)
-                throw new Exception("Hasil roast bean harus lebih dari 0.");
+                throw new Exception("Hasil roasting harus lebih dari 0 gram.");
+
+            if (batch.HasilRoastingGram >= batch.JumlahBijiDipakaiGram)
+            {
+                throw new Exception(
+                    "Berat keluar tidak boleh sama atau lebih besar dari berat masuk."
+                );
+            }
 
             if (string.IsNullOrWhiteSpace(batch.LevelRoasting))
-                throw new Exception("Roast level wajib dipilih.");
+                throw new Exception("Level roasting wajib dipilih.");
+
+            if (
+                batch.LevelRoasting != "Light" &&
+                batch.LevelRoasting != "Medium" &&
+                batch.LevelRoasting != "Medium Dark" &&
+                batch.LevelRoasting != "Dark"
+            )
+            {
+                throw new Exception("Level roasting tidak valid.");
+            }
         }
     }
 }

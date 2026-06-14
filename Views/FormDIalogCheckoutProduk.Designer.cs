@@ -29,10 +29,8 @@
             lblTotal = new Label();
             btnBatal = new Button();
             btnBayar = new Button();
-
             ((System.ComponentModel.ISupportInitialize)numJumlahGram).BeginInit();
             SuspendLayout();
-
             // 
             // lblJudul
             // 
@@ -40,10 +38,9 @@
             lblJudul.Font = new Font("Segoe UI", 14F, FontStyle.Bold);
             lblJudul.Location = new Point(24, 20);
             lblJudul.Name = "lblJudul";
-            lblJudul.Size = new Size(287, 32);
+            lblJudul.Size = new Size(289, 32);
             lblJudul.TabIndex = 0;
             lblJudul.Text = "Catat Pembelian Produk";
-
             // 
             // lblProduk
             // 
@@ -51,10 +48,9 @@
             lblProduk.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
             lblProduk.Location = new Point(27, 76);
             lblProduk.Name = "lblProduk";
-            lblProduk.Size = new Size(78, 23);
+            lblProduk.Size = new Size(86, 23);
             lblProduk.TabIndex = 1;
             lblProduk.Text = "Produk: -";
-
             // 
             // lblInfoProduk
             // 
@@ -65,7 +61,6 @@
             lblInfoProduk.Size = new Size(119, 20);
             lblInfoProduk.TabIndex = 2;
             lblInfoProduk.Text = "Harga: - / Stok: -";
-
             // 
             // lblJumlah
             // 
@@ -75,19 +70,18 @@
             lblJumlah.Size = new Size(133, 20);
             lblJumlah.TabIndex = 3;
             lblJumlah.Text = "Jumlah Beli (gram)";
-
             // 
             // numJumlahGram
             // 
-            numJumlahGram.Increment = new decimal(new int[] { 50, 0, 0, 0 });
+            numJumlahGram.Increment = new decimal(new int[] { 1, 0, 0, 131072 });
             numJumlahGram.Location = new Point(28, 176);
             numJumlahGram.Maximum = new decimal(new int[] { 100000, 0, 0, 0 });
-            numJumlahGram.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
+            numJumlahGram.Minimum = new decimal(new int[] { 1, 0, 0, 131072 });
             numJumlahGram.Name = "numJumlahGram";
             numJumlahGram.Size = new Size(240, 27);
             numJumlahGram.TabIndex = 4;
+            numJumlahGram.ThousandsSeparator = true;
             numJumlahGram.Value = new decimal(new int[] { 1, 0, 0, 0 });
-
             // 
             // lblNamaPembeli
             // 
@@ -97,7 +91,6 @@
             lblNamaPembeli.Size = new Size(106, 20);
             lblNamaPembeli.TabIndex = 5;
             lblNamaPembeli.Text = "Nama Pembeli";
-
             // 
             // txtNamaPembeli
             // 
@@ -106,7 +99,6 @@
             txtNamaPembeli.PlaceholderText = "Nama pembeli...";
             txtNamaPembeli.Size = new Size(580, 27);
             txtNamaPembeli.TabIndex = 6;
-
             // 
             // lblTotalTitle
             // 
@@ -117,7 +109,6 @@
             lblTotalTitle.Size = new Size(49, 23);
             lblTotalTitle.TabIndex = 7;
             lblTotalTitle.Text = "Total";
-
             // 
             // lblTotal
             // 
@@ -126,10 +117,9 @@
             lblTotal.ForeColor = Color.FromArgb(79, 70, 229);
             lblTotal.Location = new Point(420, 298);
             lblTotal.Name = "lblTotal";
-            lblTotal.Size = new Size(64, 32);
+            lblTotal.Size = new Size(66, 32);
             lblTotal.TabIndex = 8;
             lblTotal.Text = "Rp 0";
-
             // 
             // btnBatal
             // 
@@ -139,7 +129,6 @@
             btnBatal.TabIndex = 9;
             btnBatal.Text = "Batal";
             btnBatal.UseVisualStyleBackColor = true;
-
             // 
             // btnBayar
             // 
@@ -152,7 +141,6 @@
             btnBayar.TabIndex = 10;
             btnBayar.Text = "Catat Pembelian";
             btnBayar.UseVisualStyleBackColor = false;
-
             // 
             // FormDialogCheckoutProduk
             // 
@@ -177,7 +165,6 @@
             Name = "FormDialogCheckoutProduk";
             StartPosition = FormStartPosition.CenterParent;
             Text = "Catat Pembelian Produk";
-
             ((System.ComponentModel.ISupportInitialize)numJumlahGram).EndInit();
             ResumeLayout(false);
             PerformLayout();

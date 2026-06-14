@@ -2,9 +2,7 @@
 using SIKOPI_DOPY_MVC.Helpers;
 using SIKOPI_DOPY_MVC.Models;
 using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Text;
 
 namespace SIKOPI_DOPY_MVC.Repositories
 {
@@ -20,10 +18,11 @@ namespace SIKOPI_DOPY_MVC.Repositories
                     br.id_batch,
                     br.kode_batch,
                     gb.nama_biji AS green_bean,
-                    br.jumlah_biji_dipakai_kg,
+                    br.jumlah_biji_dipakai_gram,
                     br.hasil_roasting_gram,
                     br.level_roasting,
-                    br.tanggal_batch
+                    br.tanggal_batch,
+                    COALESCE(br.catatan, '') AS catatan
                 FROM batch_roasting br
                 JOIN biji_kopi_mentah gb
                     ON br.id_biji_mentah = gb.id_biji_mentah
@@ -51,10 +50,11 @@ namespace SIKOPI_DOPY_MVC.Repositories
                     id_biji_mentah,
                     id_pengguna,
                     kode_batch,
-                    jumlah_biji_dipakai_kg,
+                    jumlah_biji_dipakai_gram,
                     hasil_roasting_gram,
                     level_roasting,
-                    tanggal_batch
+                    tanggal_batch,
+                    COALESCE(catatan, '') AS catatan
                 FROM batch_roasting
                 WHERE id_batch = @id_batch
                   AND is_aktif = TRUE
@@ -75,10 +75,11 @@ namespace SIKOPI_DOPY_MVC.Repositories
                 IdBijiMentah = Convert.ToInt32(reader["id_biji_mentah"]),
                 IdPengguna = Convert.ToInt32(reader["id_pengguna"]),
                 KodeBatch = reader["kode_batch"].ToString() ?? "",
-                JumlahBijiDipakaiKg = Convert.ToDecimal(reader["jumlah_biji_dipakai_kg"]),
+                JumlahBijiDipakaiGram = Convert.ToDecimal(reader["jumlah_biji_dipakai_gram"]),
                 HasilRoastingGram = Convert.ToDecimal(reader["hasil_roasting_gram"]),
                 LevelRoasting = reader["level_roasting"].ToString() ?? "",
-                TanggalBatch = BacaDateTime(reader["tanggal_batch"])
+                TanggalBatch = BacaDateTime(reader["tanggal_batch"]),
+                Catatan = reader["catatan"].ToString() ?? ""
             };
         }
 
@@ -91,10 +92,25 @@ namespace SIKOPI_DOPY_MVC.Repositories
 
             try
             {
-                decimal stokSekarang = AmbilStokGreenBean(conn, trx, batch.IdBijiMentah);
+                batch.LevelRoasting = NormalisasiLevelRoasting(batch.LevelRoasting);
 
-                if (stokSekarang < batch.JumlahBijiDipakaiKg)
-                    throw new Exception("Stok green bean tidak mencukupi untuk batch roasting ini.");
+                decimal stokGreenBeanGram = AmbilStokGreenBeanGram(conn, trx, batch.IdBijiMentah);
+
+                if (batch.JumlahBijiDipakaiGram > stokGreenBeanGram)
+                {
+                    throw new Exception(
+                        "Jumlah biji masuk melebihi stok green bean. " +
+                        $"Stok tersedia: {stokGreenBeanGram:N0} gram."
+                    );
+                }
+
+                if (batch.HasilRoastingGram >= batch.JumlahBijiDipakaiGram)
+                {
+                    throw new Exception(
+                        "Hasil roasting tidak boleh sama atau lebih besar dari jumlah biji masuk. " +
+                        "Pada proses penyangraian, hasil roast bean harus lebih kecil karena terjadi penyusutan."
+                    );
+                }
 
                 string sqlInsertBatch = @"
                     INSERT INTO batch_roasting
@@ -102,10 +118,11 @@ namespace SIKOPI_DOPY_MVC.Repositories
                         id_biji_mentah,
                         id_pengguna,
                         kode_batch,
-                        jumlah_biji_dipakai_kg,
+                        jumlah_biji_dipakai_gram,
                         hasil_roasting_gram,
                         level_roasting,
                         tanggal_batch,
+                        catatan,
                         is_aktif
                     )
                     VALUES
@@ -113,10 +130,11 @@ namespace SIKOPI_DOPY_MVC.Repositories
                         @id_biji_mentah,
                         @id_pengguna,
                         @kode_batch,
-                        @jumlah_biji_dipakai_kg,
+                        @jumlah_biji_dipakai_gram,
                         @hasil_roasting_gram,
                         @level_roasting,
                         @tanggal_batch,
+                        @catatan,
                         TRUE
                     )
                     RETURNING id_batch;
@@ -126,35 +144,48 @@ namespace SIKOPI_DOPY_MVC.Repositories
                 cmdBatch.Parameters.AddWithValue("@id_biji_mentah", batch.IdBijiMentah);
                 cmdBatch.Parameters.AddWithValue("@id_pengguna", batch.IdPengguna);
                 cmdBatch.Parameters.AddWithValue("@kode_batch", batch.KodeBatch);
-                cmdBatch.Parameters.AddWithValue("@jumlah_biji_dipakai_kg", batch.JumlahBijiDipakaiKg);
+                cmdBatch.Parameters.AddWithValue("@jumlah_biji_dipakai_gram", batch.JumlahBijiDipakaiGram);
                 cmdBatch.Parameters.AddWithValue("@hasil_roasting_gram", batch.HasilRoastingGram);
                 cmdBatch.Parameters.AddWithValue("@level_roasting", batch.LevelRoasting);
                 cmdBatch.Parameters.AddWithValue("@tanggal_batch", batch.TanggalBatch);
+                cmdBatch.Parameters.AddWithValue("@catatan", batch.Catatan ?? "");
 
                 int idBatchBaru = Convert.ToInt32(cmdBatch.ExecuteScalar());
 
-                KurangiStokGreenBean(conn, trx, batch.IdBijiMentah, batch.JumlahBijiDipakaiKg);
+                KurangiStokGreenBeanGram(
+                    conn,
+                    trx,
+                    batch.IdBijiMentah,
+                    batch.JumlahBijiDipakaiGram
+                );
 
-                string namaProduk = BuatNamaProduk(conn, trx, batch.IdBijiMentah, batch.LevelRoasting, batch.KodeBatch);
+                string namaProduk = BuatNamaProduk(
+                    conn,
+                    trx,
+                    batch.IdBijiMentah,
+                    batch.LevelRoasting,
+                    batch.KodeBatch
+                );
 
                 int idRoastedBaru = TambahProdukRoasted(
                     conn,
                     trx,
                     idBatchBaru,
                     namaProduk,
-                    batch.HasilRoastingGram
+                    batch.HasilRoastingGram,
+                    batch.Catatan ?? ""
                 );
 
-                TambahRiwayatGreenBean(
+                TambahRiwayatGreenBeanKg(
                     conn,
                     trx,
                     batch.IdBijiMentah,
                     "KELUAR",
-                    batch.JumlahBijiDipakaiKg,
+                    batch.JumlahBijiDipakaiGram / 1000,
                     $"Batch roasting: {batch.KodeBatch}"
                 );
 
-                TambahRiwayatRoasted(
+                TambahRiwayatRoastedGram(
                     conn,
                     trx,
                     idRoastedBaru,
@@ -174,16 +205,6 @@ namespace SIKOPI_DOPY_MVC.Repositories
 
         public void Ubah(BatchRoasting batch)
         {
-            BatchRoasting? dataLamaNullable = AmbilById(batch.Id);
-
-            if (dataLamaNullable is null)
-                throw new Exception("Data batch roasting tidak ditemukan.");
-
-            BatchRoasting dataLama = dataLamaNullable;
-
-            if (dataLama.IdBijiMentah != batch.IdBijiMentah)
-                throw new Exception("Green bean tidak boleh diganti saat edit batch. Hapus batch lalu buat batch baru jika salah green bean.");
-
             using var conn = KoneksiDB.GetConnection();
             conn.Open();
 
@@ -191,24 +212,43 @@ namespace SIKOPI_DOPY_MVC.Repositories
 
             try
             {
-                decimal selisihPemakaian = batch.JumlahBijiDipakaiKg - dataLama.JumlahBijiDipakaiKg;
+                batch.LevelRoasting = NormalisasiLevelRoasting(batch.LevelRoasting);
 
-                if (selisihPemakaian > 0)
+                BatchRoasting dataLama = AmbilBatchDalamTransaksi(conn, trx, batch.Id);
+
+                if (dataLama.IdBijiMentah != batch.IdBijiMentah)
+                    throw new Exception("Green bean tidak boleh diganti saat edit batch.");
+
+                decimal stokGreenBeanGram = AmbilStokGreenBeanGram(conn, trx, batch.IdBijiMentah);
+
+                decimal stokTersediaUntukEditGram =
+                    stokGreenBeanGram + dataLama.JumlahBijiDipakaiGram;
+
+                if (batch.JumlahBijiDipakaiGram > stokTersediaUntukEditGram)
                 {
-                    decimal stokSekarang = AmbilStokGreenBean(conn, trx, batch.IdBijiMentah);
+                    throw new Exception(
+                        "Jumlah biji masuk melebihi stok green bean. " +
+                        $"Stok tersedia untuk edit: {stokTersediaUntukEditGram:N0} gram."
+                    );
+                }
 
-                    if (stokSekarang < selisihPemakaian)
-                        throw new Exception("Stok green bean tidak mencukupi untuk perubahan jumlah batch.");
+                if (batch.HasilRoastingGram >= batch.JumlahBijiDipakaiGram)
+                {
+                    throw new Exception(
+                        "Hasil roasting tidak boleh sama atau lebih besar dari jumlah biji masuk. " +
+                        "Pada proses penyangraian, hasil roast bean harus lebih kecil karena terjadi penyusutan."
+                    );
                 }
 
                 string sqlUpdateBatch = @"
                     UPDATE batch_roasting
                     SET
                         kode_batch = @kode_batch,
-                        jumlah_biji_dipakai_kg = @jumlah_biji_dipakai_kg,
+                        jumlah_biji_dipakai_gram = @jumlah_biji_dipakai_gram,
                         hasil_roasting_gram = @hasil_roasting_gram,
                         level_roasting = @level_roasting,
-                        tanggal_batch = @tanggal_batch
+                        tanggal_batch = @tanggal_batch,
+                        catatan = @catatan
                     WHERE id_batch = @id_batch
                       AND is_aktif = TRUE;
                 ";
@@ -216,32 +256,39 @@ namespace SIKOPI_DOPY_MVC.Repositories
                 using var cmdBatch = new NpgsqlCommand(sqlUpdateBatch, conn, trx);
                 cmdBatch.Parameters.AddWithValue("@id_batch", batch.Id);
                 cmdBatch.Parameters.AddWithValue("@kode_batch", batch.KodeBatch);
-                cmdBatch.Parameters.AddWithValue("@jumlah_biji_dipakai_kg", batch.JumlahBijiDipakaiKg);
+                cmdBatch.Parameters.AddWithValue("@jumlah_biji_dipakai_gram", batch.JumlahBijiDipakaiGram);
                 cmdBatch.Parameters.AddWithValue("@hasil_roasting_gram", batch.HasilRoastingGram);
                 cmdBatch.Parameters.AddWithValue("@level_roasting", batch.LevelRoasting);
                 cmdBatch.Parameters.AddWithValue("@tanggal_batch", batch.TanggalBatch);
+                cmdBatch.Parameters.AddWithValue("@catatan", batch.Catatan ?? "");
 
                 int jumlahBaris = cmdBatch.ExecuteNonQuery();
 
                 if (jumlahBaris == 0)
                     throw new Exception("Data batch roasting gagal diubah.");
 
-                if (selisihPemakaian > 0)
-                {
-                    KurangiStokGreenBean(conn, trx, batch.IdBijiMentah, selisihPemakaian);
-                }
-                else if (selisihPemakaian < 0)
-                {
-                    TambahStokGreenBean(conn, trx, batch.IdBijiMentah, Math.Abs(selisihPemakaian));
-                }
+                UpdateStokGreenBeanSaatEditGram(
+                    conn,
+                    trx,
+                    batch.IdBijiMentah,
+                    dataLama.JumlahBijiDipakaiGram,
+                    batch.JumlahBijiDipakaiGram
+                );
 
-                string namaProduk = BuatNamaProduk(conn, trx, batch.IdBijiMentah, batch.LevelRoasting, batch.KodeBatch);
+                string namaProduk = BuatNamaProduk(
+                    conn,
+                    trx,
+                    batch.IdBijiMentah,
+                    batch.LevelRoasting,
+                    batch.KodeBatch
+                );
 
                 string sqlUpdateRoasted = @"
                     UPDATE biji_kopi_roasted
                     SET
                         nama_produk = @nama_produk,
-                        stok_gram = @stok_gram
+                        stok_gram = @stok_gram,
+                        catatan = @catatan
                     WHERE id_batch = @id_batch
                       AND is_aktif = TRUE;
                 ";
@@ -250,6 +297,7 @@ namespace SIKOPI_DOPY_MVC.Repositories
                 cmdRoasted.Parameters.AddWithValue("@id_batch", batch.Id);
                 cmdRoasted.Parameters.AddWithValue("@nama_produk", namaProduk);
                 cmdRoasted.Parameters.AddWithValue("@stok_gram", batch.HasilRoastingGram);
+                cmdRoasted.Parameters.AddWithValue("@catatan", batch.Catatan ?? "");
                 cmdRoasted.ExecuteNonQuery();
 
                 trx.Commit();
@@ -263,13 +311,6 @@ namespace SIKOPI_DOPY_MVC.Repositories
 
         public void Hapus(int idBatch)
         {
-            BatchRoasting? dataLamaNullable = AmbilById(idBatch);
-
-            if (dataLamaNullable is null)
-                throw new Exception("Data batch roasting tidak ditemukan.");
-
-            BatchRoasting dataLama = dataLamaNullable;
-
             using var conn = KoneksiDB.GetConnection();
             conn.Open();
 
@@ -277,6 +318,8 @@ namespace SIKOPI_DOPY_MVC.Repositories
 
             try
             {
+                BatchRoasting dataLama = AmbilBatchDalamTransaksi(conn, trx, idBatch);
+
                 string sqlHapusBatch = @"
                     UPDATE batch_roasting
                     SET is_aktif = FALSE
@@ -303,14 +346,19 @@ namespace SIKOPI_DOPY_MVC.Repositories
                 cmdRoasted.Parameters.AddWithValue("@id_batch", idBatch);
                 cmdRoasted.ExecuteNonQuery();
 
-                TambahStokGreenBean(conn, trx, dataLama.IdBijiMentah, dataLama.JumlahBijiDipakaiKg);
+                TambahStokGreenBeanGram(
+                    conn,
+                    trx,
+                    dataLama.IdBijiMentah,
+                    dataLama.JumlahBijiDipakaiGram
+                );
 
-                TambahRiwayatGreenBean(
+                TambahRiwayatGreenBeanKg(
                     conn,
                     trx,
                     dataLama.IdBijiMentah,
                     "MASUK",
-                    dataLama.JumlahBijiDipakaiKg,
+                    dataLama.JumlahBijiDipakaiGram / 1000,
                     $"Hapus batch roasting: {dataLama.KodeBatch}"
                 );
 
@@ -323,13 +371,61 @@ namespace SIKOPI_DOPY_MVC.Repositories
             }
         }
 
-        private decimal AmbilStokGreenBean(NpgsqlConnection conn, NpgsqlTransaction trx, int idBijiMentah)
+        private BatchRoasting AmbilBatchDalamTransaksi(
+            NpgsqlConnection conn,
+            NpgsqlTransaction trx,
+            int idBatch)
+        {
+            string sql = @"
+                SELECT
+                    id_batch,
+                    id_biji_mentah,
+                    id_pengguna,
+                    kode_batch,
+                    jumlah_biji_dipakai_gram,
+                    hasil_roasting_gram,
+                    level_roasting,
+                    tanggal_batch,
+                    COALESCE(catatan, '') AS catatan
+                FROM batch_roasting
+                WHERE id_batch = @id_batch
+                  AND is_aktif = TRUE
+                FOR UPDATE;
+            ";
+
+            using var cmd = new NpgsqlCommand(sql, conn, trx);
+            cmd.Parameters.AddWithValue("@id_batch", idBatch);
+
+            using var reader = cmd.ExecuteReader();
+
+            if (!reader.Read())
+                throw new Exception("Data batch roasting tidak ditemukan.");
+
+            return new BatchRoasting
+            {
+                Id = Convert.ToInt32(reader["id_batch"]),
+                IdBijiMentah = Convert.ToInt32(reader["id_biji_mentah"]),
+                IdPengguna = Convert.ToInt32(reader["id_pengguna"]),
+                KodeBatch = reader["kode_batch"].ToString() ?? "",
+                JumlahBijiDipakaiGram = Convert.ToDecimal(reader["jumlah_biji_dipakai_gram"]),
+                HasilRoastingGram = Convert.ToDecimal(reader["hasil_roasting_gram"]),
+                LevelRoasting = reader["level_roasting"].ToString() ?? "",
+                TanggalBatch = BacaDateTime(reader["tanggal_batch"]),
+                Catatan = reader["catatan"].ToString() ?? ""
+            };
+        }
+
+        private decimal AmbilStokGreenBeanGram(
+            NpgsqlConnection conn,
+            NpgsqlTransaction trx,
+            int idBijiMentah)
         {
             string sql = @"
                 SELECT stok_kg
                 FROM biji_kopi_mentah
                 WHERE id_biji_mentah = @id_biji_mentah
-                  AND is_aktif = TRUE;
+                  AND is_aktif = TRUE
+                FOR UPDATE;
             ";
 
             using var cmd = new NpgsqlCommand(sql, conn, trx);
@@ -340,34 +436,65 @@ namespace SIKOPI_DOPY_MVC.Repositories
             if (hasil == null || hasil == DBNull.Value)
                 throw new Exception("Data green bean tidak ditemukan.");
 
-            return Convert.ToDecimal(hasil);
+            decimal stokKg = Convert.ToDecimal(hasil);
+            return stokKg * 1000;
         }
 
-        private void KurangiStokGreenBean(NpgsqlConnection conn, NpgsqlTransaction trx, int idBijiMentah, decimal jumlah)
+        private void KurangiStokGreenBeanGram(
+            NpgsqlConnection conn,
+            NpgsqlTransaction trx,
+            int idBijiMentah,
+            decimal jumlahGram)
         {
             string sql = @"
                 UPDATE biji_kopi_mentah
-                SET stok_kg = stok_kg - @jumlah
+                SET stok_kg = stok_kg - (@jumlah_gram / 1000.0)
                 WHERE id_biji_mentah = @id_biji_mentah;
             ";
 
             using var cmd = new NpgsqlCommand(sql, conn, trx);
             cmd.Parameters.AddWithValue("@id_biji_mentah", idBijiMentah);
-            cmd.Parameters.AddWithValue("@jumlah", jumlah);
+            cmd.Parameters.AddWithValue("@jumlah_gram", jumlahGram);
             cmd.ExecuteNonQuery();
         }
 
-        private void TambahStokGreenBean(NpgsqlConnection conn, NpgsqlTransaction trx, int idBijiMentah, decimal jumlah)
+        private void TambahStokGreenBeanGram(
+            NpgsqlConnection conn,
+            NpgsqlTransaction trx,
+            int idBijiMentah,
+            decimal jumlahGram)
         {
             string sql = @"
                 UPDATE biji_kopi_mentah
-                SET stok_kg = stok_kg + @jumlah
+                SET stok_kg = stok_kg + (@jumlah_gram / 1000.0)
                 WHERE id_biji_mentah = @id_biji_mentah;
             ";
 
             using var cmd = new NpgsqlCommand(sql, conn, trx);
             cmd.Parameters.AddWithValue("@id_biji_mentah", idBijiMentah);
-            cmd.Parameters.AddWithValue("@jumlah", jumlah);
+            cmd.Parameters.AddWithValue("@jumlah_gram", jumlahGram);
+            cmd.ExecuteNonQuery();
+        }
+
+        private void UpdateStokGreenBeanSaatEditGram(
+            NpgsqlConnection conn,
+            NpgsqlTransaction trx,
+            int idBijiMentah,
+            decimal jumlahLamaGram,
+            decimal jumlahBaruGram)
+        {
+            string sql = @"
+                UPDATE biji_kopi_mentah
+                SET stok_kg = stok_kg
+                    + (@jumlah_lama_gram / 1000.0)
+                    - (@jumlah_baru_gram / 1000.0)
+                WHERE id_biji_mentah = @id_biji_mentah;
+            ";
+
+            using var cmd = new NpgsqlCommand(sql, conn, trx);
+            cmd.Parameters.AddWithValue("@id_biji_mentah", idBijiMentah);
+            cmd.Parameters.AddWithValue("@jumlah_lama_gram", jumlahLamaGram);
+            cmd.Parameters.AddWithValue("@jumlah_baru_gram", jumlahBaruGram);
             cmd.ExecuteNonQuery();
         }
 
@@ -376,7 +503,8 @@ namespace SIKOPI_DOPY_MVC.Repositories
             NpgsqlTransaction trx,
             int idBatch,
             string namaProduk,
-            decimal stokGram)
+            decimal stokGram,
+            string catatan)
         {
             string sql = @"
                 INSERT INTO biji_kopi_roasted
@@ -386,6 +514,7 @@ namespace SIKOPI_DOPY_MVC.Repositories
                     stok_gram,
                     harga_per_gram,
                     status_harga,
+                    catatan,
                     is_aktif
                 )
                 VALUES
@@ -395,6 +524,7 @@ namespace SIKOPI_DOPY_MVC.Repositories
                     @stok_gram,
                     0,
                     'MENUNGGU_HARGA',
+                    @catatan,
                     TRUE
                 )
                 RETURNING id_roasted;
@@ -404,6 +534,7 @@ namespace SIKOPI_DOPY_MVC.Repositories
             cmd.Parameters.AddWithValue("@id_batch", idBatch);
             cmd.Parameters.AddWithValue("@nama_produk", namaProduk);
             cmd.Parameters.AddWithValue("@stok_gram", stokGram);
+            cmd.Parameters.AddWithValue("@catatan", catatan ?? "");
 
             return Convert.ToInt32(cmd.ExecuteScalar());
         }
@@ -429,78 +560,108 @@ namespace SIKOPI_DOPY_MVC.Repositories
             return $"{namaBiji} - {levelRoasting} - {kodeBatch}";
         }
 
-        private void TambahRiwayatGreenBean(
+        private void TambahRiwayatGreenBeanKg(
             NpgsqlConnection conn,
             NpgsqlTransaction trx,
             int idBijiMentah,
             string arah,
-            decimal jumlah,
+            decimal jumlahKg,
             string referensi)
         {
             string sql = @"
                 INSERT INTO riwayat_stok
                 (
                     id_biji_mentah,
+                    id_roasted,
                     kategori,
                     arah,
                     jumlah,
                     satuan,
-                    referensi
+                    referensi,
+                    tanggal_riwayat
                 )
                 VALUES
                 (
                     @id_biji_mentah,
+                    NULL,
                     'GREEN_BEAN',
                     @arah,
                     @jumlah,
-                    'KG',
-                    @referensi
+                    'kg',
+                    @referensi,
+                    NOW()
                 );
             ";
 
             using var cmd = new NpgsqlCommand(sql, conn, trx);
             cmd.Parameters.AddWithValue("@id_biji_mentah", idBijiMentah);
             cmd.Parameters.AddWithValue("@arah", arah);
-            cmd.Parameters.AddWithValue("@jumlah", jumlah);
+            cmd.Parameters.AddWithValue("@jumlah", jumlahKg);
             cmd.Parameters.AddWithValue("@referensi", referensi);
             cmd.ExecuteNonQuery();
         }
 
-        private void TambahRiwayatRoasted(
+        private void TambahRiwayatRoastedGram(
             NpgsqlConnection conn,
             NpgsqlTransaction trx,
             int idRoasted,
             string arah,
-            decimal jumlah,
+            decimal jumlahGram,
             string referensi)
         {
             string sql = @"
                 INSERT INTO riwayat_stok
                 (
+                    id_biji_mentah,
                     id_roasted,
                     kategori,
                     arah,
                     jumlah,
                     satuan,
-                    referensi
+                    referensi,
+                    tanggal_riwayat
                 )
                 VALUES
                 (
+                    NULL,
                     @id_roasted,
                     'ROASTED_BEAN',
                     @arah,
                     @jumlah,
-                    'GRAM',
-                    @referensi
+                    'gram',
+                    @referensi,
+                    NOW()
                 );
             ";
 
             using var cmd = new NpgsqlCommand(sql, conn, trx);
             cmd.Parameters.AddWithValue("@id_roasted", idRoasted);
             cmd.Parameters.AddWithValue("@arah", arah);
-            cmd.Parameters.AddWithValue("@jumlah", jumlah);
+            cmd.Parameters.AddWithValue("@jumlah", jumlahGram);
             cmd.Parameters.AddWithValue("@referensi", referensi);
             cmd.ExecuteNonQuery();
+        }
+
+        private string NormalisasiLevelRoasting(string levelRoasting)
+        {
+            string nilai = levelRoasting.Trim();
+
+            if (nilai == "Light Roast")
+                return "Light";
+
+            if (nilai == "Medium Roast")
+                return "Medium";
+
+            if (nilai == "Medium-Dark")
+                return "Medium Dark";
+
+            if (nilai == "Medium Dark Roast")
+                return "Medium Dark";
+
+            if (nilai == "Dark Roast")
+                return "Dark";
+
+            return nilai;
         }
 
         private DateTime BacaDateTime(object nilai)

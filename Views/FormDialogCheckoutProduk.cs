@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Drawing;
 using System.Globalization;
 using System.Windows.Forms;
 using SIKOPI_DOPY_MVC.Controllers;
@@ -43,33 +42,37 @@ namespace SIKOPI_DOPY_MVC.Views
 
             lblInfoProduk.Text =
                 $"Rp {_produk.HargaPerGram.ToString("N0", new CultureInfo("id-ID"))}/g • " +
-                $"Stok: {_produk.StokGram.ToString("0.##", CultureInfo.InvariantCulture)}g";
+                $"Stok: {_produk.StokGram.ToString("N0", new CultureInfo("id-ID"))}g";
 
             btnBayar.Text = "Catat Pembelian";
 
-            decimal maksimum = _produk.StokGram;
+     
+            numJumlahGram.Enabled = true;
+            btnBayar.Enabled = true;
 
-            if (maksimum < 1)
+            numJumlahGram.DecimalPlaces = 4;
+            numJumlahGram.ThousandsSeparator = true;
+            numJumlahGram.Minimum = 0.01M;
+            numJumlahGram.Maximum = 100000;
+            numJumlahGram.Increment = 0.01M;
+            decimal stokTersedia = _produk.StokGram;
+
+            if (stokTersedia <= 0)
             {
-                numJumlahGram.Minimum = 1;
-                numJumlahGram.Maximum = 1;
-                numJumlahGram.Value = 1;
-
+                numJumlahGram.Value = 0.01M;
+                numJumlahGram.Enabled = false;
                 btnBayar.Enabled = false;
-                btnBayar.BackColor = Color.Gray;
 
                 lblTotal.Text = "Rp 0";
                 return;
             }
 
-            numJumlahGram.Minimum = 1;
-            numJumlahGram.Maximum = maksimum;
-            numJumlahGram.Increment = 50;
+            numJumlahGram.Maximum = stokTersedia;
 
-            if (maksimum >= 100)
+            if (stokTersedia >= 100)
                 numJumlahGram.Value = 100;
             else
-                numJumlahGram.Value = maksimum;
+                numJumlahGram.Value = stokTersedia;
         }
 
         private void numJumlahGram_ValueChanged(object? sender, EventArgs e)
@@ -97,8 +100,14 @@ namespace SIKOPI_DOPY_MVC.Views
                 if (jumlahGram <= 0)
                     throw new Exception("Jumlah pembelian harus lebih dari 0 gram.");
 
+                if (_produk.StokGram <= 0)
+                    throw new Exception("Stok produk ini sudah habis.");
+
                 if (jumlahGram > _produk.StokGram)
-                    throw new Exception("Jumlah pembelian melebihi stok tersedia.");
+                    throw new Exception(
+                        $"Jumlah pembelian melebihi stok tersedia. " +
+                        $"Stok tersedia: {_produk.StokGram.ToString("N0", new CultureInfo("id-ID"))}g."
+                    );
 
                 var pembelian = new PembelianProduk
                 {

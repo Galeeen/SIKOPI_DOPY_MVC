@@ -10,5 +10,6 @@ namespace SIKOPI_DOPY_MVC.Models
         public string KataSandi { get; set; } = "";
         public string NamaLengkap { get; set; } = "";
         public string Peran { get; set; } = "";
+
     }
 }
