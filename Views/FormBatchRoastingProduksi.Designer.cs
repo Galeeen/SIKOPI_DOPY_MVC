@@ -82,8 +82,7 @@
             btnTambahBatch.TabIndex = 2;
             btnTambahBatch.Text = "+ Tambah Batch";
             btnTambahBatch.UseVisualStyleBackColor = true;
-            btnTambahBatch.Click += button1_Click;
-            // 
+                     // 
             // tabBatchProduksi
             // 
             tabBatchProduksi.Controls.Add(tabBatchRoasting);

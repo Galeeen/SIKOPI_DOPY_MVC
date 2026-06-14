@@ -7,6 +7,8 @@ namespace SIKOPI_DOPY_MVC.Models
     {
         public int Id { get; set; }
         public string Nama { get; set; } = "";
+        public string AsalDaerah { get; set; } = "";
+        public string MetodeProses { get; set; } = "";
         public decimal StokKg { get; set; }
     }
 }

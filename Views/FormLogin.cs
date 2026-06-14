@@ -48,12 +48,9 @@ namespace SIKOPI_DOPY_MVC.Views
                 }
                 else if (pengguna.Peran == "Karyawan Penjual")
                 {
-                    MessageBox.Show(
-                        "Role Karyawan Penjual belum dibuat.",
-                        "Informasi",
-                        MessageBoxButtons.OK,
-                        MessageBoxIcon.Information
-                    );
+                    FormUtamaPenjual formPenjual = new FormUtamaPenjual(pengguna);
+                    formPenjual.Show();
+                    Hide();
                 }
                 else
                 {

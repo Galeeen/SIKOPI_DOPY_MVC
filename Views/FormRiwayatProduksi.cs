@@ -21,8 +21,6 @@ namespace SIKOPI_DOPY_MVC.Views
         {
             InitializeComponent();
 
-            MessageBox.Show("INI BENAR-BENAR FORM RIWAYAT PRODUKSI");
-
             _riwayatProduksiController = new RiwayatProduksiController();
 
             MuatSemuaData();

@@ -12,11 +12,11 @@ using SIKOPI_DOPY_MVC.Models;
 
 namespace SIKOPI_DOPY_MVC.Views
 {
-    public partial class FormUtamaProduksi : Form
+    public partial class FormUtamaPenjual : Form
     {
         private readonly Pengguna _penggunaLogin;
 
-        public FormUtamaProduksi(Pengguna penggunaLogin)
+        public FormUtamaPenjual(Pengguna penggunaLogin)
         {
             InitializeComponent();
 
@@ -25,24 +25,22 @@ namespace SIKOPI_DOPY_MVC.Views
             SambungkanEvent();
             AturProfilUser();
 
-            TampilkanDashboardProduksi();
+            TampilkanDashboardPenjual();
         }
-
-
 
         private void SambungkanEvent()
         {
             btnDashboard.Click -= btnDashboard_Click;
             btnDashboard.Click += btnDashboard_Click;
 
-            btnBahanBaku.Click -= btnBahanBaku_Click;
-            btnBahanBaku.Click += btnBahanBaku_Click;
+            btnBahanBakuPenjual.Click -= btnBahanBakuPenjual_Click;
+            btnBahanBakuPenjual.Click += btnBahanBakuPenjual_Click; 
 
-            btnBatchRoasting.Click -= btnBatchRoasting_Click;
-            btnBatchRoasting.Click += btnBatchRoasting_Click;
+            btnEtalase.Click -= btnEtalase_Click;
+            btnEtalase.Click += btnEtalase_Click;
 
-            btnRiwayat.Click -= btnRiwayat_Click;
-            btnRiwayat.Click += btnRiwayat_Click;
+            btnRiwayatPenjualan.Click -= btnRiwayatPenjualan_Click;
+            btnRiwayatPenjualan.Click += btnRiwayatPenjualan_Click;
 
             btnKeluar.Click -= btnKeluar_Click;
             btnKeluar.Click += btnKeluar_Click;
@@ -66,37 +64,29 @@ namespace SIKOPI_DOPY_MVC.Views
             form.Show();
         }
 
-        private void TampilkanDashboardProduksi()
+        private void TampilkanDashboardPenjual()
         {
-            pnlKonten.Controls.Clear();
-
-            Panel panelDashboard = new Panel
-            {
-                Dock = DockStyle.Fill,
-                BackColor = Color.WhiteSmoke
-            };
-
-            pnlKonten.Controls.Add(panelDashboard);
+            TampilkanFormDiPanel(new FormDashboardPenjual());
         }
 
         private void btnDashboard_Click(object? sender, EventArgs e)
         {
-            TampilkanDashboardProduksi();
+            TampilkanDashboardPenjual();
         }
 
-        private void btnBahanBaku_Click(object? sender, EventArgs e)
+        private void btnBahanBakuPenjual_Click(object? sender, EventArgs e)
         {
-            TampilkanFormDiPanel(new FormBahanBakuProduksi());
+            TampilkanFormDiPanel(new FormBahanBakuPenjual());
         }
 
-        private void btnBatchRoasting_Click(object? sender, EventArgs e)
+        private void btnEtalase_Click(object? sender, EventArgs e)
         {
-            TampilkanFormDiPanel(new FormBatchRoastingProduksi(_penggunaLogin));
+            TampilkanFormDiPanel(new FormEtalaseToko(_penggunaLogin));
         }
 
-        private void btnRiwayat_Click(object? sender, EventArgs e)
+        private void btnRiwayatPenjualan_Click(object? sender, EventArgs e)
         {
-            TampilkanFormDiPanel(new FormRiwayatProduksi());
+            TampilkanFormDiPanel(new FormRiwayatPenjualan());
         }
 
         private void btnKeluar_Click(object? sender, EventArgs e)
@@ -112,11 +102,6 @@ namespace SIKOPI_DOPY_MVC.Views
                 return;
 
             Close();
-        }
-
-        private void pnlSidebar_Paint(object sender, PaintEventArgs e)
-        {
-
         }
     }
 }
