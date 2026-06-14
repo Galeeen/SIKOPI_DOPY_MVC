@@ -113,6 +113,7 @@
             btnEtalase.TabIndex = 3;
             btnEtalase.Text = "Etalase Toko";
             btnEtalase.UseVisualStyleBackColor = true;
+            btnEtalase.Click += btnEtalase_Click;
             // 
             // btnBatchRoasting
             // 

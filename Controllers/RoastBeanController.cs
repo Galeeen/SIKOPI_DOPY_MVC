@@ -5,6 +5,7 @@ using System.Data;
 using SIKOPI_DOPY_MVC.Models;
 using SIKOPI_DOPY_MVC.Repositories;
 
+
 namespace SIKOPI_DOPY_MVC.Controllers
 {
     public class RoastBeanController
@@ -40,6 +41,11 @@ namespace SIKOPI_DOPY_MVC.Controllers
                 throw new Exception("Harga per gram harus lebih dari 0.");
 
             _repositoriRoastBean.UbahHarga(idRoasted, hargaPerGram);
+        }
+
+        public List<RoastBean> AmbilProdukEtalase()
+        {
+            return _repositoriRoastBean.AmbilSiapJual();
         }
     }
 }

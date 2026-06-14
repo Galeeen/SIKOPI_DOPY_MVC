@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System;
+using System.Collections.Generic;
 using System.Data;
 using Npgsql;
 using SIKOPI_DOPY_MVC.Helpers;
@@ -32,6 +34,7 @@ namespace SIKOPI_DOPY_MVC.Repositories
                 JOIN biji_kopi_mentah gb
                     ON br.id_biji_mentah = gb.id_biji_mentah
                 WHERE rb.is_aktif = TRUE
+                  AND br.is_aktif = TRUE
                 ORDER BY rb.id_roasted DESC;
             ";
 
@@ -68,6 +71,7 @@ namespace SIKOPI_DOPY_MVC.Repositories
                     ON br.id_biji_mentah = gb.id_biji_mentah
                 WHERE rb.id_roasted = @id_roasted
                   AND rb.is_aktif = TRUE
+                  AND br.is_aktif = TRUE
                 LIMIT 1;
             ";
 
@@ -116,6 +120,61 @@ namespace SIKOPI_DOPY_MVC.Repositories
 
             if (jumlahBaris == 0)
                 throw new Exception("Data roast bean tidak ditemukan atau gagal diubah.");
+        }
+
+        public List<RoastBean> AmbilSiapJual()
+        {
+            var hasil = new List<RoastBean>();
+
+            using var conn = KoneksiDB.GetConnection();
+            conn.Open();
+
+            string sql = @"
+                SELECT
+                    rb.id_roasted,
+                    rb.id_batch,
+                    rb.nama_produk,
+                    rb.stok_gram,
+                    rb.harga_per_gram,
+                    rb.status_harga,
+                    br.kode_batch,
+                    br.level_roasting,
+                    gb.asal_daerah,
+                    COALESCE(rb.catatan, br.catatan, '') AS catatan
+                FROM biji_kopi_roasted rb
+                JOIN batch_roasting br
+                    ON rb.id_batch = br.id_batch
+                JOIN biji_kopi_mentah gb
+                    ON br.id_biji_mentah = gb.id_biji_mentah
+                WHERE rb.is_aktif = TRUE
+                  AND br.is_aktif = TRUE
+                  AND rb.status_harga = 'SIAP_JUAL'
+                  AND rb.harga_per_gram > 0
+                  AND rb.stok_gram > 0
+                ORDER BY rb.nama_produk ASC;
+            ";
+
+            using var cmd = new NpgsqlCommand(sql, conn);
+            using var reader = cmd.ExecuteReader();
+
+            while (reader.Read())
+            {
+                hasil.Add(new RoastBean
+                {
+                    Id = Convert.ToInt32(reader["id_roasted"]),
+                    IdBatch = Convert.ToInt32(reader["id_batch"]),
+                    NamaProduk = reader["nama_produk"].ToString() ?? "",
+                    StokGram = Convert.ToDecimal(reader["stok_gram"]),
+                    HargaPerGram = Convert.ToDecimal(reader["harga_per_gram"]),
+                    StatusHarga = reader["status_harga"].ToString() ?? "",
+                    KodeBatch = reader["kode_batch"].ToString() ?? "",
+                    LevelRoasting = reader["level_roasting"].ToString() ?? "",
+                    AsalDaerah = reader["asal_daerah"].ToString() ?? "",
+                    Catatan = reader["catatan"].ToString() ?? ""
+                });
+            }
+
+            return hasil;
         }
     }
 }

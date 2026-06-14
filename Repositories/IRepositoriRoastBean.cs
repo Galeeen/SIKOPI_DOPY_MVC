@@ -11,5 +11,6 @@ namespace SIKOPI_DOPY_MVC.Repositories
         DataTable AmbilSemua();
         RoastBean? AmbilById(int idRoasted);
         void UbahHarga(int idRoasted, decimal hargaPerGram);
+        List<RoastBean> AmbilSiapJual();
     }
 }

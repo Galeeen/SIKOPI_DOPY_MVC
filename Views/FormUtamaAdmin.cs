@@ -1,9 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Text;
 using System.Windows.Forms;
 using SIKOPI_DOPY_MVC.Models;
 
@@ -28,6 +23,9 @@ namespace SIKOPI_DOPY_MVC.Views
             btnBatchRoasting.Click -= btnBatchRoasting_Click;
             btnBatchRoasting.Click += btnBatchRoasting_Click;
 
+            btnEtalase.Click -= btnEtalase_Click;
+            btnEtalase.Click += btnEtalase_Click;
+
             btnKeluar.Click -= btnKeluar_Click;
             btnKeluar.Click += btnKeluar_Click;
 
@@ -49,22 +47,27 @@ namespace SIKOPI_DOPY_MVC.Views
             form.Show();
         }
 
-        private void btnDashboard_Click(object sender, EventArgs e)
+        private void btnDashboard_Click(object? sender, EventArgs e)
         {
             TampilkanFormDiPanel(new FormDashboardAdmin());
         }
 
-        private void btnBahanBaku_Click(object sender, EventArgs e)
+        private void btnBahanBaku_Click(object? sender, EventArgs e)
         {
             TampilkanFormDiPanel(new FormBahanBakuAdmin());
         }
 
-        private void btnBatchRoasting_Click(object sender, EventArgs e)
+        private void btnBatchRoasting_Click(object? sender, EventArgs e)
         {
             TampilkanFormDiPanel(new FormBatchRoastingAdmin(_penggunaLogin));
         }
 
-        private void btnKeluar_Click(object sender, EventArgs e)
+        private void btnEtalase_Click(object? sender, EventArgs e)
+        {
+            TampilkanFormDiPanel(new FormEtalaseToko(_penggunaLogin));
+        }
+
+        private void btnKeluar_Click(object? sender, EventArgs e)
         {
             var konfirmasi = MessageBox.Show(
                 "Yakin ingin keluar?",
