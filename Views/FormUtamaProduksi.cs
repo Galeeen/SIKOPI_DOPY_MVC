@@ -68,15 +68,7 @@ namespace SIKOPI_DOPY_MVC.Views
 
         private void TampilkanDashboardProduksi()
         {
-            pnlKonten.Controls.Clear();
-
-            Panel panelDashboard = new Panel
-            {
-                Dock = DockStyle.Fill,
-                BackColor = Color.WhiteSmoke
-            };
-
-            pnlKonten.Controls.Add(panelDashboard);
+            TampilkanFormDiPanel(new FormDashboardProduksi());
         }
 
         private void btnDashboard_Click(object? sender, EventArgs e)
@@ -112,6 +104,9 @@ namespace SIKOPI_DOPY_MVC.Views
                 return;
 
             Close();
+        }
+        private void label1_Click(object sender, EventArgs e)
+        {
         }
 
         private void pnlSidebar_Paint(object sender, PaintEventArgs e)
