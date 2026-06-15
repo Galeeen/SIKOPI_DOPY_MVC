@@ -28,8 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            ComboBox cmbJenis;
-            ComboBox cmbTingkatKualitas;
             txtNamaBiji = new TextBox();
             txtAsalDaerah = new TextBox();
             txtKetinggianMdpl = new TextBox();

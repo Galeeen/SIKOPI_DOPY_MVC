@@ -67,6 +67,13 @@ namespace SIKOPI_DOPY_MVC.Views
             catch (Exception ex)
             {
                 lblPesan.Text = ex.Message;
+
+                MessageBox.Show(
+                    ex.Message,
+                    "Login Gagal",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error
+                );
             }
 
         }

@@ -185,6 +185,7 @@
             Margin = new Padding(4, 4, 4, 4);
             Name = "FormUtamaProduksi";
             StartPosition = FormStartPosition.CenterScreen;
+            WindowState = FormWindowState.Maximized;
             Text = "SIKOPI DOPY - Produksi";
             pnlSidebar.ResumeLayout(false);
             pnlSidebar.PerformLayout();

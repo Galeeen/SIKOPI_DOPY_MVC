@@ -15,6 +15,7 @@ namespace SIKOPI_DOPY_MVC.Views
     public partial class FormBatchRoastingProduksi : Form
     {
         private readonly BatchRoastingProduksiController _batchRoastingProduksiController;
+        private readonly BatchRoastingController _batchRoastingController;
         private readonly Pengguna _penggunaLogin;
 
         public FormBatchRoastingProduksi(Pengguna penggunaLogin)
@@ -23,6 +24,7 @@ namespace SIKOPI_DOPY_MVC.Views
 
             _penggunaLogin = penggunaLogin;
             _batchRoastingProduksiController = new BatchRoastingProduksiController();
+            _batchRoastingController = new BatchRoastingController(_penggunaLogin.Id);
 
             SambungkanEvent();
             MuatSemuaData();
@@ -32,8 +34,10 @@ namespace SIKOPI_DOPY_MVC.Views
         {
             btnTambahBatch.Click -= btnTambahBatch_Click;
             btnTambahBatch.Click += btnTambahBatch_Click;
-        }
 
+            dgvBatchRoasting.CellClick -= dgvBatchRoasting_CellClick;
+            dgvBatchRoasting.CellClick += dgvBatchRoasting_CellClick;
+        }
         private void MuatSemuaData()
         {
             MuatBatchRoasting();
@@ -48,6 +52,7 @@ namespace SIKOPI_DOPY_MVC.Views
                 dgvBatchRoasting.DataSource = _batchRoastingProduksiController.AmbilBatchRoasting();
 
                 AturGridBatchRoasting();
+                TambahKolomAksiBatch();
             }
             catch (Exception ex)
             {
@@ -124,6 +129,41 @@ namespace SIKOPI_DOPY_MVC.Views
                 dgvBatchRoasting.Columns["catatan"].HeaderText = "CATATAN";
         }
 
+        private void TambahKolomAksiBatch()
+        {
+            if (dgvBatchRoasting.Columns.Contains("colEdit"))
+                dgvBatchRoasting.Columns.Remove("colEdit");
+
+            if (dgvBatchRoasting.Columns.Contains("colHapus"))
+                dgvBatchRoasting.Columns.Remove("colHapus");
+
+            var colEdit = new DataGridViewButtonColumn
+            {
+                Name = "colEdit",
+                HeaderText = "",
+                Text = "Edit",
+                UseColumnTextForButtonValue = true,
+                AutoSizeMode = DataGridViewAutoSizeColumnMode.None,
+                Width = 80
+            };
+
+            var colHapus = new DataGridViewButtonColumn
+            {
+                Name = "colHapus",
+                HeaderText = "",
+                Text = "Hapus",
+                UseColumnTextForButtonValue = true,
+                AutoSizeMode = DataGridViewAutoSizeColumnMode.None,
+                Width = 80
+            };
+
+            dgvBatchRoasting.Columns.Add(colEdit);
+            dgvBatchRoasting.Columns.Add(colHapus);
+
+            dgvBatchRoasting.Columns["colEdit"].DisplayIndex = dgvBatchRoasting.Columns.Count - 2;
+            dgvBatchRoasting.Columns["colHapus"].DisplayIndex = dgvBatchRoasting.Columns.Count - 1;
+        }
+
         private void AturGridRoastBean()
         {
             dgvRoastBean.ReadOnly = true;
@@ -177,6 +217,8 @@ namespace SIKOPI_DOPY_MVC.Views
                 dgvRoastBean.Columns["catatan"].HeaderText = "CATATAN";
         }
 
+
+
         private void btnTambahBatch_Click(object? sender, EventArgs e)
         {
             using var form = new FormDialogBatchRoasting(_penggunaLogin);
@@ -184,6 +226,87 @@ namespace SIKOPI_DOPY_MVC.Views
             if (form.ShowDialog() == DialogResult.OK)
             {
                 MuatSemuaData();
+            }
+        }
+
+        private void dgvBatchRoasting_CellClick(object? sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex < 0 || e.ColumnIndex < 0)
+                return;
+
+            string namaKolom = dgvBatchRoasting.Columns[e.ColumnIndex].Name;
+
+            if (namaKolom != "colEdit" && namaKolom != "colHapus")
+                return;
+
+            if (!dgvBatchRoasting.Columns.Contains("id_batch"))
+            {
+                MessageBox.Show(
+                    "Kolom id_batch tidak ditemukan.",
+                    "Error",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error
+                );
+                return;
+            }
+
+            int idBatch = Convert.ToInt32(
+                dgvBatchRoasting.Rows[e.RowIndex].Cells["id_batch"].Value
+            );
+
+            if (namaKolom == "colEdit")
+            {
+                EditBatch(idBatch);
+            }
+            else if (namaKolom == "colHapus")
+            {
+                HapusBatch(idBatch);
+            }
+        }
+
+        private void EditBatch(int idBatch)
+        {
+            using var form = new FormDialogBatchRoasting(_penggunaLogin, idBatch);
+
+            if (form.ShowDialog() == DialogResult.OK)
+            {
+                MuatSemuaData();
+            }
+        }
+
+        private void HapusBatch(int idBatch)
+        {
+            DialogResult hasil = MessageBox.Show(
+                "Yakin ingin menghapus batch roasting ini?",
+                "Konfirmasi Hapus",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question
+            );
+
+            if (hasil != DialogResult.Yes)
+                return;
+
+            try
+            {
+                _batchRoastingController.HapusBatch(idBatch);
+
+                MessageBox.Show(
+                    "Batch roasting berhasil dihapus.",
+                    "Berhasil",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Information
+                );
+
+                MuatSemuaData();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(
+                    ex.Message,
+                    "Gagal Menghapus Batch",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error
+                );
             }
         }
     }
