@@ -97,5 +97,10 @@ namespace SIKOPI_DOPY_MVC.Views
                 this.Close();
             }
         }
+
+        private void lblNamaUser_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

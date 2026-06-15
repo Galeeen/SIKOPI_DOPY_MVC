@@ -29,44 +29,51 @@
         private void InitializeComponent()
         {
             pnlHeader = new Panel();
-            lblJudul = new Label();
             lblSubJudul = new Label();
+            lblJudul = new Label();
             pnlRingkasan = new Panel();
-            lblTransaksiHariIni = new Label();
-            lblOmzetHariIni = new Label();
-            lblProdukTerjual = new Label();
             lblTotalTransaksi = new Label();
+            lblProdukTerjual = new Label();
+            lblOmzetHariIni = new Label();
+            lblTransaksiHariIni = new Label();
             pnlHeader.SuspendLayout();
             pnlRingkasan.SuspendLayout();
             SuspendLayout();
             // 
             // pnlHeader
             // 
+            pnlHeader.BackColor = Color.FromArgb(79, 70, 229);
             pnlHeader.Controls.Add(lblSubJudul);
             pnlHeader.Controls.Add(lblJudul);
             pnlHeader.Dock = DockStyle.Top;
             pnlHeader.Location = new Point(0, 0);
+            pnlHeader.Margin = new Padding(4, 4, 4, 4);
             pnlHeader.Name = "pnlHeader";
-            pnlHeader.Size = new Size(982, 90);
+            pnlHeader.Size = new Size(1280, 112);
             pnlHeader.TabIndex = 0;
-            // 
-            // lblJudul
-            // 
-            lblJudul.AutoSize = true;
-            lblJudul.Location = new Point(24, 14);
-            lblJudul.Name = "lblJudul";
-            lblJudul.Size = new Size(133, 20);
-            lblJudul.TabIndex = 0;
-            lblJudul.Text = "Dashboard Penjual";
             // 
             // lblSubJudul
             // 
             lblSubJudul.AutoSize = true;
-            lblSubJudul.Location = new Point(27, 55);
+            lblSubJudul.ForeColor = Color.White;
+            lblSubJudul.Location = new Point(32, 56);
+            lblSubJudul.Margin = new Padding(4, 0, 4, 0);
             lblSubJudul.Name = "lblSubJudul";
-            lblSubJudul.Size = new Size(269, 20);
+            lblSubJudul.Size = new Size(325, 25);
             lblSubJudul.TabIndex = 1;
             lblSubJudul.Text = "Ringkasan penjualan dan transaksi toko";
+            // 
+            // lblJudul
+            // 
+            lblJudul.AutoSize = true;
+            lblJudul.Font = new Font("Segoe UI", 14F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblJudul.ForeColor = Color.White;
+            lblJudul.Location = new Point(30, 18);
+            lblJudul.Margin = new Padding(4, 0, 4, 0);
+            lblJudul.Name = "lblJudul";
+            lblJudul.Size = new Size(263, 38);
+            lblJudul.TabIndex = 0;
+            lblJudul.Text = "Dashboard Penjual";
             // 
             // pnlRingkasan
             // 
@@ -75,58 +82,69 @@
             pnlRingkasan.Controls.Add(lblOmzetHariIni);
             pnlRingkasan.Controls.Add(lblTransaksiHariIni);
             pnlRingkasan.Dock = DockStyle.Top;
-            pnlRingkasan.Location = new Point(0, 90);
+            pnlRingkasan.Location = new Point(0, 112);
+            pnlRingkasan.Margin = new Padding(4, 4, 4, 4);
             pnlRingkasan.Name = "pnlRingkasan";
-            pnlRingkasan.Size = new Size(982, 140);
+            pnlRingkasan.Size = new Size(1280, 175);
             pnlRingkasan.TabIndex = 1;
-            // 
-            // lblTransaksiHariIni
-            // 
-            lblTransaksiHariIni.BorderStyle = BorderStyle.FixedSingle;
-            lblTransaksiHariIni.Location = new Point(24, 25);
-            lblTransaksiHariIni.Name = "lblTransaksiHariIni";
-            lblTransaksiHariIni.Size = new Size(200, 80);
-            lblTransaksiHariIni.TabIndex = 0;
-            lblTransaksiHariIni.Text = "Transaksi Hari Ini\\r\\n0";
-            lblTransaksiHariIni.TextAlign = ContentAlignment.MiddleCenter;
-            // 
-            // lblOmzetHariIni
-            // 
-            lblOmzetHariIni.BorderStyle = BorderStyle.FixedSingle;
-            lblOmzetHariIni.Location = new Point(244, 25);
-            lblOmzetHariIni.Name = "lblOmzetHariIni";
-            lblOmzetHariIni.Size = new Size(200, 80);
-            lblOmzetHariIni.TabIndex = 1;
-            lblOmzetHariIni.Text = "Omzet Hari Ini\\r\\nRp 0";
-            lblOmzetHariIni.TextAlign = ContentAlignment.MiddleCenter;
-            // 
-            // lblProdukTerjual
-            // 
-            lblProdukTerjual.BorderStyle = BorderStyle.FixedSingle;
-            lblProdukTerjual.Location = new Point(464, 25);
-            lblProdukTerjual.Name = "lblProdukTerjual";
-            lblProdukTerjual.Size = new Size(200, 80);
-            lblProdukTerjual.TabIndex = 2;
-            lblProdukTerjual.Text = "Produk Terjual\\r\\n0 g";
-            lblProdukTerjual.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // lblTotalTransaksi
             // 
             lblTotalTransaksi.BorderStyle = BorderStyle.FixedSingle;
-            lblTotalTransaksi.Location = new Point(684, 25);
+            lblTotalTransaksi.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblTotalTransaksi.Location = new Point(919, 31);
+            lblTotalTransaksi.Margin = new Padding(4, 0, 4, 0);
             lblTotalTransaksi.Name = "lblTotalTransaksi";
-            lblTotalTransaksi.Size = new Size(200, 80);
+            lblTotalTransaksi.Size = new Size(250, 100);
             lblTotalTransaksi.TabIndex = 3;
             lblTotalTransaksi.Text = "Total Transaksi\\r\\n0";
             lblTotalTransaksi.TextAlign = ContentAlignment.MiddleCenter;
             // 
+            // lblProdukTerjual
+            // 
+            lblProdukTerjual.BorderStyle = BorderStyle.FixedSingle;
+            lblProdukTerjual.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblProdukTerjual.Location = new Point(627, 31);
+            lblProdukTerjual.Margin = new Padding(4, 0, 4, 0);
+            lblProdukTerjual.Name = "lblProdukTerjual";
+            lblProdukTerjual.Size = new Size(250, 100);
+            lblProdukTerjual.TabIndex = 2;
+            lblProdukTerjual.Text = "Produk Terjual\\r\\n0 g";
+            lblProdukTerjual.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // lblOmzetHariIni
+            // 
+            lblOmzetHariIni.BorderStyle = BorderStyle.FixedSingle;
+            lblOmzetHariIni.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblOmzetHariIni.Location = new Point(330, 31);
+            lblOmzetHariIni.Margin = new Padding(4, 0, 4, 0);
+            lblOmzetHariIni.Name = "lblOmzetHariIni";
+            lblOmzetHariIni.Size = new Size(250, 100);
+            lblOmzetHariIni.TabIndex = 1;
+            lblOmzetHariIni.Text = "Omzet Hari Ini\\r\\nRp 0";
+            lblOmzetHariIni.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // lblTransaksiHariIni
+            // 
+            lblTransaksiHariIni.BorderStyle = BorderStyle.FixedSingle;
+            lblTransaksiHariIni.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblTransaksiHariIni.Location = new Point(30, 31);
+            lblTransaksiHariIni.Margin = new Padding(4, 0, 4, 0);
+            lblTransaksiHariIni.Name = "lblTransaksiHariIni";
+            lblTransaksiHariIni.Size = new Size(250, 100);
+            lblTransaksiHariIni.TabIndex = 0;
+            lblTransaksiHariIni.Text = "Transaksi Hari Ini\\r\\n0";
+            lblTransaksiHariIni.TextAlign = ContentAlignment.MiddleCenter;
+            // 
             // FormDashboardPenjual
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(982, 553);
+            ClientSize = new Size(1280, 720);
             Controls.Add(pnlRingkasan);
             Controls.Add(pnlHeader);
+            FormBorderStyle = FormBorderStyle.None;
+            Margin = new Padding(4, 4, 4, 4);
             Name = "FormDashboardPenjual";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Dashboard Penjual";

@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             pnlHeader = new Panel();
-            lblJudul = new Label();
             lblSubJudul = new Label();
+            lblJudul = new Label();
             dgvRoastBean = new DataGridView();
             pnlHeader.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvRoastBean).BeginInit();
@@ -38,31 +38,39 @@
             // 
             // pnlHeader
             // 
+            pnlHeader.BackColor = Color.FromArgb(79, 70, 229);
             pnlHeader.Controls.Add(lblSubJudul);
             pnlHeader.Controls.Add(lblJudul);
             pnlHeader.Dock = DockStyle.Top;
             pnlHeader.Location = new Point(0, 0);
+            pnlHeader.Margin = new Padding(4, 4, 4, 4);
             pnlHeader.Name = "pnlHeader";
-            pnlHeader.Size = new Size(982, 90);
+            pnlHeader.Size = new Size(1280, 112);
             pnlHeader.TabIndex = 0;
-            // 
-            // lblJudul
-            // 
-            lblJudul.AutoSize = true;
-            lblJudul.Location = new Point(24, 14);
-            lblJudul.Name = "lblJudul";
-            lblJudul.Size = new Size(86, 20);
-            lblJudul.TabIndex = 0;
-            lblJudul.Text = "Bahan Baku";
             // 
             // lblSubJudul
             // 
             lblSubJudul.AutoSize = true;
-            lblSubJudul.Location = new Point(27, 55);
+            lblSubJudul.ForeColor = Color.White;
+            lblSubJudul.Location = new Point(38, 65);
+            lblSubJudul.Margin = new Padding(4, 0, 4, 0);
             lblSubJudul.Name = "lblSubJudul";
-            lblSubJudul.Size = new Size(344, 20);
+            lblSubJudul.Size = new Size(416, 25);
             lblSubJudul.TabIndex = 1;
             lblSubJudul.Text = "Lihat data roast bean, stok, harga, dan status harga";
+            // 
+            // lblJudul
+            // 
+            lblJudul.AutoSize = true;
+            lblJudul.Font = new Font("Segoe UI", 14F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblJudul.ForeColor = Color.White;
+            lblJudul.Location = new Point(34, 28);
+            lblJudul.Margin = new Padding(4, 0, 4, 0);
+            lblJudul.Name = "lblJudul";
+            lblJudul.Size = new Size(173, 38);
+            lblJudul.TabIndex = 0;
+            lblJudul.Text = "Bahan Baku";
+            lblJudul.Click += lblJudul_Click;
             // 
             // dgvRoastBean
             // 
@@ -71,23 +79,26 @@
             dgvRoastBean.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgvRoastBean.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvRoastBean.Dock = DockStyle.Fill;
-            dgvRoastBean.Location = new Point(0, 90);
+            dgvRoastBean.Location = new Point(0, 112);
+            dgvRoastBean.Margin = new Padding(4, 4, 4, 4);
             dgvRoastBean.MultiSelect = false;
             dgvRoastBean.Name = "dgvRoastBean";
             dgvRoastBean.ReadOnly = true;
             dgvRoastBean.RowHeadersVisible = false;
             dgvRoastBean.RowHeadersWidth = 51;
             dgvRoastBean.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgvRoastBean.Size = new Size(982, 463);
+            dgvRoastBean.Size = new Size(1280, 608);
             dgvRoastBean.TabIndex = 1;
             // 
             // FormBahanBakuPenjual
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(982, 553);
+            ClientSize = new Size(1280, 720);
             Controls.Add(dgvRoastBean);
             Controls.Add(pnlHeader);
+            FormBorderStyle = FormBorderStyle.None;
+            Margin = new Padding(4, 4, 4, 4);
             Name = "FormBahanBakuPenjual";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Bahan Baku Penjual";

@@ -44,102 +44,126 @@
             // lblJudul
             // 
             lblJudul.AutoSize = true;
-            lblJudul.Location = new Point(12, 9);
+            lblJudul.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblJudul.Location = new Point(15, 18);
+            lblJudul.Margin = new Padding(4, 0, 4, 0);
             lblJudul.Name = "lblJudul";
-            lblJudul.Size = new Size(94, 20);
+            lblJudul.Size = new Size(161, 32);
             lblJudul.TabIndex = 0;
             lblJudul.Text = "Tambah User";
             // 
             // lblNamaLengkap
             // 
             lblNamaLengkap.AutoSize = true;
-            lblNamaLengkap.Location = new Point(12, 61);
+            lblNamaLengkap.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblNamaLengkap.Location = new Point(15, 76);
+            lblNamaLengkap.Margin = new Padding(4, 0, 4, 0);
             lblNamaLengkap.Name = "lblNamaLengkap";
-            lblNamaLengkap.Size = new Size(109, 20);
+            lblNamaLengkap.Size = new Size(139, 25);
             lblNamaLengkap.TabIndex = 1;
             lblNamaLengkap.Text = "Nama Lengkap";
             // 
             // txtNamaLengkap
             // 
-            txtNamaLengkap.Location = new Point(12, 84);
+            txtNamaLengkap.Location = new Point(15, 105);
+            txtNamaLengkap.Margin = new Padding(4, 4, 4, 4);
             txtNamaLengkap.Name = "txtNamaLengkap";
-            txtNamaLengkap.Size = new Size(125, 27);
+            txtNamaLengkap.Size = new Size(250, 31);
             txtNamaLengkap.TabIndex = 2;
             txtNamaLengkap.UseSystemPasswordChar = true;
             // 
             // lblUsername
             // 
             lblUsername.AutoSize = true;
-            lblUsername.Location = new Point(12, 136);
+            lblUsername.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblUsername.Location = new Point(15, 170);
+            lblUsername.Margin = new Padding(4, 0, 4, 0);
             lblUsername.Name = "lblUsername";
-            lblUsername.Size = new Size(75, 20);
+            lblUsername.Size = new Size(97, 25);
             lblUsername.TabIndex = 3;
             lblUsername.Text = "Username";
             // 
             // lblPassword
             // 
             lblPassword.AutoSize = true;
-            lblPassword.Location = new Point(12, 216);
+            lblPassword.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblPassword.Location = new Point(15, 270);
+            lblPassword.Margin = new Padding(4, 0, 4, 0);
             lblPassword.Name = "lblPassword";
-            lblPassword.Size = new Size(70, 20);
+            lblPassword.Size = new Size(92, 25);
             lblPassword.TabIndex = 4;
             lblPassword.Text = "Password";
             // 
             // lblRole
             // 
             lblRole.AutoSize = true;
-            lblRole.Location = new Point(12, 293);
+            lblRole.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblRole.Location = new Point(15, 366);
+            lblRole.Margin = new Padding(4, 0, 4, 0);
             lblRole.Name = "lblRole";
-            lblRole.Size = new Size(39, 20);
+            lblRole.Size = new Size(50, 25);
             lblRole.TabIndex = 5;
             lblRole.Text = "Role";
             // 
             // txtUsername
             // 
-            txtUsername.Location = new Point(12, 159);
+            txtUsername.Location = new Point(15, 199);
+            txtUsername.Margin = new Padding(4, 4, 4, 4);
             txtUsername.Name = "txtUsername";
-            txtUsername.Size = new Size(125, 27);
+            txtUsername.Size = new Size(250, 31);
             txtUsername.TabIndex = 6;
             // 
             // txtPassword
             // 
-            txtPassword.Location = new Point(12, 239);
+            txtPassword.Location = new Point(15, 299);
+            txtPassword.Margin = new Padding(4, 4, 4, 4);
             txtPassword.Name = "txtPassword";
-            txtPassword.Size = new Size(125, 27);
+            txtPassword.Size = new Size(250, 31);
             txtPassword.TabIndex = 7;
             // 
             // cmbRole
             // 
             cmbRole.DropDownStyle = ComboBoxStyle.DropDownList;
             cmbRole.FormattingEnabled = true;
-            cmbRole.Location = new Point(12, 316);
+            cmbRole.Location = new Point(15, 395);
+            cmbRole.Margin = new Padding(4, 4, 4, 4);
             cmbRole.Name = "cmbRole";
-            cmbRole.Size = new Size(151, 28);
+            cmbRole.Size = new Size(250, 33);
             cmbRole.TabIndex = 8;
             // 
             // btnBatal
             // 
-            btnBatal.Location = new Point(457, 381);
+            btnBatal.BackColor = Color.FromArgb(79, 70, 229);
+            btnBatal.FlatStyle = FlatStyle.Flat;
+            btnBatal.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnBatal.ForeColor = SystemColors.ButtonHighlight;
+            btnBatal.Location = new Point(571, 476);
+            btnBatal.Margin = new Padding(4, 4, 4, 4);
             btnBatal.Name = "btnBatal";
-            btnBatal.Size = new Size(94, 29);
+            btnBatal.Size = new Size(118, 36);
             btnBatal.TabIndex = 9;
             btnBatal.Text = "Batal";
-            btnBatal.UseVisualStyleBackColor = true;
+            btnBatal.UseVisualStyleBackColor = false;
             // 
             // btnSimpan
             // 
-            btnSimpan.Location = new Point(601, 381);
+            btnSimpan.BackColor = Color.FromArgb(79, 70, 229);
+            btnSimpan.FlatStyle = FlatStyle.Flat;
+            btnSimpan.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnSimpan.ForeColor = SystemColors.ButtonHighlight;
+            btnSimpan.Location = new Point(751, 476);
+            btnSimpan.Margin = new Padding(4, 4, 4, 4);
             btnSimpan.Name = "btnSimpan";
-            btnSimpan.Size = new Size(94, 29);
+            btnSimpan.Size = new Size(118, 36);
             btnSimpan.TabIndex = 10;
             btnSimpan.Text = "Simpan";
-            btnSimpan.UseVisualStyleBackColor = true;
+            btnSimpan.UseVisualStyleBackColor = false;
             // 
             // FormDialogUser
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(1000, 562);
             Controls.Add(btnSimpan);
             Controls.Add(btnBatal);
             Controls.Add(cmbRole);
@@ -151,6 +175,7 @@
             Controls.Add(txtNamaLengkap);
             Controls.Add(lblNamaLengkap);
             Controls.Add(lblJudul);
+            Margin = new Padding(4, 4, 4, 4);
             Name = "FormDialogUser";
             Text = "FormDialogUser";
             ResumeLayout(false);

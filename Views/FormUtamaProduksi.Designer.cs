@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormUtamaProduksi));
             pnlSidebar = new Panel();
             lblRole = new Label();
             lblNamaUser = new Label();
@@ -36,13 +37,16 @@
             btnBatchRoasting = new Button();
             btnBahanBaku = new Button();
             btnDashboard = new Button();
-            lblLogo = new Label();
             pnlKonten = new Panel();
+            pictureBox1 = new PictureBox();
             pnlSidebar.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
             // pnlSidebar
             // 
+            pnlSidebar.BackColor = Color.MidnightBlue;
+            pnlSidebar.Controls.Add(pictureBox1);
             pnlSidebar.Controls.Add(lblRole);
             pnlSidebar.Controls.Add(lblNamaUser);
             pnlSidebar.Controls.Add(btnKeluar);
@@ -50,106 +54,141 @@
             pnlSidebar.Controls.Add(btnBatchRoasting);
             pnlSidebar.Controls.Add(btnBahanBaku);
             pnlSidebar.Controls.Add(btnDashboard);
-            pnlSidebar.Controls.Add(lblLogo);
             pnlSidebar.Dock = DockStyle.Left;
             pnlSidebar.Location = new Point(0, 0);
+            pnlSidebar.Margin = new Padding(4, 4, 4, 4);
             pnlSidebar.Name = "pnlSidebar";
-            pnlSidebar.Size = new Size(220, 673);
+            pnlSidebar.Size = new Size(300, 720);
             pnlSidebar.TabIndex = 0;
             pnlSidebar.Paint += pnlSidebar_Paint;
             // 
             // lblRole
             // 
             lblRole.AutoSize = true;
-            lblRole.Location = new Point(20, 535);
+            lblRole.ForeColor = Color.White;
+            lblRole.Location = new Point(121, 56);
+            lblRole.Margin = new Padding(4, 0, 4, 0);
             lblRole.Name = "lblRole";
-            lblRole.Size = new Size(133, 20);
+            lblRole.Size = new Size(161, 25);
             lblRole.TabIndex = 7;
             lblRole.Text = "Karyawan Produksi";
             // 
             // lblNamaUser
             // 
             lblNamaUser.AutoSize = true;
-            lblNamaUser.Location = new Point(20, 510);
+            lblNamaUser.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblNamaUser.ForeColor = Color.White;
+            lblNamaUser.Location = new Point(121, 31);
+            lblNamaUser.Margin = new Padding(4, 0, 4, 0);
             lblNamaUser.Name = "lblNamaUser";
-            lblNamaUser.Size = new Size(82, 20);
+            lblNamaUser.Size = new Size(105, 25);
             lblNamaUser.TabIndex = 6;
             lblNamaUser.Text = "Nama User";
             // 
             // btnKeluar
             // 
-            btnKeluar.Location = new Point(24, 580);
+            btnKeluar.BackColor = Color.FromArgb(79, 70, 229);
+            btnKeluar.FlatStyle = FlatStyle.Flat;
+            btnKeluar.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnKeluar.ForeColor = SystemColors.ButtonHighlight;
+            btnKeluar.Location = new Point(25, 647);
+            btnKeluar.Margin = new Padding(4, 4, 4, 4);
             btnKeluar.Name = "btnKeluar";
-            btnKeluar.Size = new Size(94, 29);
+            btnKeluar.Size = new Size(166, 36);
             btnKeluar.TabIndex = 5;
             btnKeluar.Text = "Keluar";
-            btnKeluar.UseVisualStyleBackColor = true;
+            btnKeluar.UseVisualStyleBackColor = false;
             // 
             // btnRiwayat
             // 
-            btnRiwayat.Location = new Point(20, 253);
+            btnRiwayat.BackColor = Color.FromArgb(79, 70, 229);
+            btnRiwayat.FlatStyle = FlatStyle.Flat;
+            btnRiwayat.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnRiwayat.ForeColor = SystemColors.ButtonHighlight;
+            btnRiwayat.Location = new Point(25, 281);
+            btnRiwayat.Margin = new Padding(4, 4, 4, 4);
             btnRiwayat.Name = "btnRiwayat";
-            btnRiwayat.Size = new Size(94, 29);
+            btnRiwayat.Size = new Size(256, 36);
             btnRiwayat.TabIndex = 4;
             btnRiwayat.Text = "Riwayat";
-            btnRiwayat.UseVisualStyleBackColor = true;
+            btnRiwayat.UseVisualStyleBackColor = false;
             // 
             // btnBatchRoasting
             // 
-            btnBatchRoasting.Location = new Point(20, 198);
+            btnBatchRoasting.BackColor = Color.FromArgb(79, 70, 229);
+            btnBatchRoasting.FlatStyle = FlatStyle.Flat;
+            btnBatchRoasting.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnBatchRoasting.ForeColor = SystemColors.ButtonHighlight;
+            btnBatchRoasting.Location = new Point(25, 228);
+            btnBatchRoasting.Margin = new Padding(4, 4, 4, 4);
             btnBatchRoasting.Name = "btnBatchRoasting";
-            btnBatchRoasting.Size = new Size(94, 29);
+            btnBatchRoasting.Size = new Size(256, 36);
             btnBatchRoasting.TabIndex = 3;
             btnBatchRoasting.Text = "Batch Roasting";
-            btnBatchRoasting.UseVisualStyleBackColor = true;
+            btnBatchRoasting.UseVisualStyleBackColor = false;
             // 
             // btnBahanBaku
             // 
-            btnBahanBaku.Location = new Point(20, 143);
+            btnBahanBaku.BackColor = Color.FromArgb(79, 70, 229);
+            btnBahanBaku.FlatStyle = FlatStyle.Flat;
+            btnBahanBaku.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnBahanBaku.ForeColor = SystemColors.ButtonHighlight;
+            btnBahanBaku.Location = new Point(25, 170);
+            btnBahanBaku.Margin = new Padding(4, 4, 4, 4);
             btnBahanBaku.Name = "btnBahanBaku";
-            btnBahanBaku.Size = new Size(94, 29);
+            btnBahanBaku.Size = new Size(256, 36);
             btnBahanBaku.TabIndex = 2;
             btnBahanBaku.Text = "Bahan Baku";
-            btnBahanBaku.UseVisualStyleBackColor = true;
+            btnBahanBaku.UseVisualStyleBackColor = false;
             // 
             // btnDashboard
             // 
-            btnDashboard.Location = new Point(20, 90);
+            btnDashboard.BackColor = Color.FromArgb(79, 70, 229);
+            btnDashboard.FlatStyle = FlatStyle.Flat;
+            btnDashboard.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnDashboard.ForeColor = SystemColors.ButtonHighlight;
+            btnDashboard.Location = new Point(25, 112);
+            btnDashboard.Margin = new Padding(4, 4, 4, 4);
             btnDashboard.Name = "btnDashboard";
-            btnDashboard.Size = new Size(94, 29);
+            btnDashboard.Size = new Size(256, 36);
             btnDashboard.TabIndex = 1;
             btnDashboard.Text = "Dashboard";
-            btnDashboard.UseVisualStyleBackColor = true;
-            // 
-            // lblLogo
-            // 
-            lblLogo.AutoSize = true;
-            lblLogo.Location = new Point(24, 24);
-            lblLogo.Name = "lblLogo";
-            lblLogo.Size = new Size(94, 20);
-            lblLogo.TabIndex = 0;
-            lblLogo.Text = "SIKOPI DOPY";
+            btnDashboard.UseVisualStyleBackColor = false;
             // 
             // pnlKonten
             // 
             pnlKonten.Dock = DockStyle.Fill;
-            pnlKonten.Location = new Point(220, 0);
+            pnlKonten.Location = new Point(300, 0);
+            pnlKonten.Margin = new Padding(4, 4, 4, 4);
             pnlKonten.Name = "pnlKonten";
-            pnlKonten.Size = new Size(962, 673);
+            pnlKonten.Size = new Size(980, 720);
             pnlKonten.TabIndex = 1;
+            // 
+            // pictureBox1
+            // 
+            pictureBox1.BackgroundImage = (Image)resources.GetObject("pictureBox1.BackgroundImage");
+            pictureBox1.BackgroundImageLayout = ImageLayout.Zoom;
+            pictureBox1.Location = new Point(25, 22);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(85, 68);
+            pictureBox1.TabIndex = 13;
+            pictureBox1.TabStop = false;
             // 
             // FormUtamaProduksi
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1182, 673);
+            ClientSize = new Size(1280, 720);
             Controls.Add(pnlKonten);
             Controls.Add(pnlSidebar);
+            FormBorderStyle = FormBorderStyle.None;
+            Margin = new Padding(4, 4, 4, 4);
             Name = "FormUtamaProduksi";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "SIKOPI DOPY - Produksi";
             pnlSidebar.ResumeLayout(false);
             pnlSidebar.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
         }
 
@@ -163,7 +202,7 @@
         private Button btnBatchRoasting;
         private Button btnBahanBaku;
         private Button btnDashboard;
-        private Label lblLogo;
         private Panel pnlKonten;
+        private PictureBox pictureBox1;
     }
 }

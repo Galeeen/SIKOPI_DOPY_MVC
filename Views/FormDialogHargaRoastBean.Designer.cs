@@ -39,66 +39,83 @@
             // lblNamaProduk
             // 
             lblNamaProduk.AutoSize = true;
-            lblNamaProduk.Location = new Point(12, 9);
+            lblNamaProduk.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblNamaProduk.Location = new Point(15, 11);
+            lblNamaProduk.Margin = new Padding(4, 0, 4, 0);
             lblNamaProduk.Name = "lblNamaProduk";
-            lblNamaProduk.Size = new Size(68, 20);
+            lblNamaProduk.Size = new Size(91, 25);
             lblNamaProduk.TabIndex = 0;
             lblNamaProduk.Text = "Produk: -";
             // 
             // lblHarga
             // 
             lblHarga.AutoSize = true;
-            lblHarga.Location = new Point(12, 102);
+            lblHarga.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblHarga.Location = new Point(15, 74);
+            lblHarga.Margin = new Padding(4, 0, 4, 0);
             lblHarga.Name = "lblHarga";
-            lblHarga.Size = new Size(148, 20);
+            lblHarga.Size = new Size(190, 25);
             lblHarga.TabIndex = 1;
             lblHarga.Text = "Harga per Gram (Rp)";
             // 
             // txtHargaPerGram
             // 
-            txtHargaPerGram.Location = new Point(12, 125);
+            txtHargaPerGram.Location = new Point(15, 114);
+            txtHargaPerGram.Margin = new Padding(4, 4, 4, 4);
             txtHargaPerGram.Name = "txtHargaPerGram";
-            txtHargaPerGram.Size = new Size(125, 27);
+            txtHargaPerGram.Size = new Size(155, 31);
             txtHargaPerGram.TabIndex = 2;
             txtHargaPerGram.Text = "0";
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(12, 175);
+            label1.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label1.Location = new Point(178, 117);
+            label1.Margin = new Padding(4, 0, 4, 0);
             label1.Name = "label1";
-            label1.Size = new Size(459, 20);
+            label1.Size = new Size(592, 25);
             label1.TabIndex = 3;
             label1.Text = "Setelah harga diinput, produk akan otomatis muncul di Etalase Toko";
             // 
             // btnBatal
             // 
+            btnBatal.BackColor = Color.FromArgb(79, 70, 229);
             btnBatal.Cursor = Cursors.Hand;
             btnBatal.DialogResult = DialogResult.Cancel;
-            btnBatal.Location = new Point(35, 263);
+            btnBatal.FlatStyle = FlatStyle.Flat;
+            btnBatal.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnBatal.ForeColor = SystemColors.ButtonHighlight;
+            btnBatal.Location = new Point(28, 212);
+            btnBatal.Margin = new Padding(4, 4, 4, 4);
             btnBatal.Name = "btnBatal";
-            btnBatal.Size = new Size(94, 29);
+            btnBatal.Size = new Size(118, 36);
             btnBatal.TabIndex = 4;
             btnBatal.Text = "Batal";
-            btnBatal.UseVisualStyleBackColor = true;
+            btnBatal.UseVisualStyleBackColor = false;
             // 
             // btnSimpan
             // 
+            btnSimpan.BackColor = Color.FromArgb(79, 70, 229);
             btnSimpan.Cursor = Cursors.Hand;
-            btnSimpan.Location = new Point(267, 263);
+            btnSimpan.FlatStyle = FlatStyle.Flat;
+            btnSimpan.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnSimpan.ForeColor = SystemColors.ButtonHighlight;
+            btnSimpan.Location = new Point(178, 212);
+            btnSimpan.Margin = new Padding(4, 4, 4, 4);
             btnSimpan.Name = "btnSimpan";
-            btnSimpan.Size = new Size(94, 29);
+            btnSimpan.Size = new Size(118, 36);
             btnSimpan.TabIndex = 5;
             btnSimpan.Text = "Simpan";
-            btnSimpan.UseVisualStyleBackColor = true;
+            btnSimpan.UseVisualStyleBackColor = false;
             // 
             // FormDialogHargaRoastBean
             // 
             AcceptButton = btnBatal;
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
             CancelButton = btnBatal;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(818, 499);
             Controls.Add(btnSimpan);
             Controls.Add(btnBatal);
             Controls.Add(label1);
@@ -106,6 +123,7 @@
             Controls.Add(lblHarga);
             Controls.Add(lblNamaProduk);
             FormBorderStyle = FormBorderStyle.FixedDialog;
+            Margin = new Padding(4, 4, 4, 4);
             MaximizeBox = false;
             MinimizeBox = false;
             Name = "FormDialogHargaRoastBean";

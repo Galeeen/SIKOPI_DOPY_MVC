@@ -31,9 +31,9 @@
             components = new System.ComponentModel.Container();
             contextMenuStrip1 = new ContextMenuStrip(components);
             pnlHeader = new Panel();
-            lblJudul = new Label();
-            lblSubJudul = new Label();
             btnTambahUser = new Button();
+            lblSubJudul = new Label();
+            lblJudul = new Label();
             flowLayoutPanel1 = new FlowLayoutPanel();
             pnlHeader.SuspendLayout();
             SuspendLayout();
@@ -46,64 +46,77 @@
             // 
             // pnlHeader
             // 
+            pnlHeader.BackColor = Color.FromArgb(79, 70, 229);
             pnlHeader.Controls.Add(btnTambahUser);
             pnlHeader.Controls.Add(lblSubJudul);
             pnlHeader.Controls.Add(lblJudul);
             pnlHeader.Dock = DockStyle.Top;
             pnlHeader.Location = new Point(0, 0);
+            pnlHeader.Margin = new Padding(4, 4, 4, 4);
             pnlHeader.Name = "pnlHeader";
-            pnlHeader.Padding = new Padding(24, 16, 24, 16);
-            pnlHeader.Size = new Size(982, 120);
+            pnlHeader.Padding = new Padding(30, 20, 30, 20);
+            pnlHeader.Size = new Size(1280, 150);
             pnlHeader.TabIndex = 1;
             // 
-            // lblJudul
+            // btnTambahUser
             // 
-            lblJudul.AutoSize = true;
-            lblJudul.Location = new Point(24, 24);
-            lblJudul.Name = "lblJudul";
-            lblJudul.Size = new Size(120, 20);
-            lblJudul.TabIndex = 0;
-            lblJudul.Text = "Manajemen User";
+            btnTambahUser.BackColor = Color.White;
+            btnTambahUser.FlatStyle = FlatStyle.Flat;
+            btnTambahUser.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnTambahUser.Location = new Point(988, 44);
+            btnTambahUser.Margin = new Padding(4, 4, 4, 4);
+            btnTambahUser.Name = "btnTambahUser";
+            btnTambahUser.Size = new Size(212, 44);
+            btnTambahUser.TabIndex = 3;
+            btnTambahUser.Text = "+ Tambah User";
+            btnTambahUser.UseVisualStyleBackColor = false;
             // 
             // lblSubJudul
             // 
             lblSubJudul.AutoSize = true;
-            lblSubJudul.Location = new Point(27, 64);
+            lblSubJudul.ForeColor = Color.White;
+            lblSubJudul.Location = new Point(34, 68);
+            lblSubJudul.Margin = new Padding(4, 0, 4, 0);
             lblSubJudul.Name = "lblSubJudul";
-            lblSubJudul.Size = new Size(237, 20);
+            lblSubJudul.Size = new Size(314, 25);
             lblSubJudul.TabIndex = 2;
-            lblSubJudul.Text = "Kelola akun pengguna sistem & role";
+            lblSubJudul.Text = "Kelola akun pengguna sistem dan role";
             lblSubJudul.Click += label1_Click;
             // 
-            // btnTambahUser
+            // lblJudul
             // 
-            btnTambahUser.FlatStyle = FlatStyle.Flat;
-            btnTambahUser.Location = new Point(790, 35);
-            btnTambahUser.Name = "btnTambahUser";
-            btnTambahUser.Size = new Size(170, 35);
-            btnTambahUser.TabIndex = 3;
-            btnTambahUser.Text = "+ Tambah User";
-            btnTambahUser.UseVisualStyleBackColor = true;
+            lblJudul.AutoSize = true;
+            lblJudul.Font = new Font("Segoe UI", 14F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblJudul.ForeColor = Color.White;
+            lblJudul.Location = new Point(30, 30);
+            lblJudul.Margin = new Padding(4, 0, 4, 0);
+            lblJudul.Name = "lblJudul";
+            lblJudul.Size = new Size(238, 38);
+            lblJudul.TabIndex = 0;
+            lblJudul.Text = "Manajemen User";
             // 
             // flowLayoutPanel1
             // 
             flowLayoutPanel1.AutoScroll = true;
             flowLayoutPanel1.Dock = DockStyle.Fill;
-            flowLayoutPanel1.Location = new Point(0, 120);
+            flowLayoutPanel1.Location = new Point(0, 150);
+            flowLayoutPanel1.Margin = new Padding(4, 4, 4, 4);
             flowLayoutPanel1.Name = "flowLayoutPanel1";
-            flowLayoutPanel1.Padding = new Padding(24);
-            flowLayoutPanel1.Size = new Size(982, 433);
+            flowLayoutPanel1.Padding = new Padding(30, 30, 30, 30);
+            flowLayoutPanel1.Size = new Size(1280, 570);
             flowLayoutPanel1.TabIndex = 2;
             // 
             // FormManajemenUserAdmin
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
             AutoSize = true;
-            ClientSize = new Size(982, 553);
+            ClientSize = new Size(1280, 720);
             Controls.Add(flowLayoutPanel1);
             Controls.Add(pnlHeader);
+            FormBorderStyle = FormBorderStyle.None;
             Location = new Point(24, 24);
+            Margin = new Padding(4, 4, 4, 4);
             Name = "FormManajemenUserAdmin";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Manajemen User";

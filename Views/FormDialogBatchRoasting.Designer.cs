@@ -49,42 +49,47 @@
             // 
             cmbGreenBean.DropDownStyle = ComboBoxStyle.DropDownList;
             cmbGreenBean.FormattingEnabled = true;
-            cmbGreenBean.Location = new Point(12, 31);
+            cmbGreenBean.Location = new Point(15, 39);
+            cmbGreenBean.Margin = new Padding(4, 4, 4, 4);
             cmbGreenBean.Name = "cmbGreenBean";
-            cmbGreenBean.Size = new Size(151, 28);
+            cmbGreenBean.Size = new Size(188, 33);
             cmbGreenBean.TabIndex = 0;
             // 
             // cmbLevelRoasting
             // 
             cmbLevelRoasting.DropDownStyle = ComboBoxStyle.DropDownList;
             cmbLevelRoasting.FormattingEnabled = true;
-            cmbLevelRoasting.Location = new Point(12, 250);
+            cmbLevelRoasting.Location = new Point(15, 312);
+            cmbLevelRoasting.Margin = new Padding(4, 4, 4, 4);
             cmbLevelRoasting.Name = "cmbLevelRoasting";
-            cmbLevelRoasting.Size = new Size(151, 28);
+            cmbLevelRoasting.Size = new Size(188, 33);
             cmbLevelRoasting.TabIndex = 1;
             // 
             // lblInfoGreenBean
             // 
             lblInfoGreenBean.AutoSize = true;
-            lblInfoGreenBean.Location = new Point(12, 62);
+            lblInfoGreenBean.Location = new Point(15, 78);
+            lblInfoGreenBean.Margin = new Padding(4, 0, 4, 0);
             lblInfoGreenBean.Name = "lblInfoGreenBean";
-            lblInfoGreenBean.Size = new Size(77, 20);
+            lblInfoGreenBean.Size = new Size(91, 25);
             lblInfoGreenBean.TabIndex = 2;
             lblInfoGreenBean.Text = "Tersedia: -";
             // 
             // txtJumlahBijiDipakaiGram
             // 
-            txtJumlahBijiDipakaiGram.Location = new Point(12, 124);
+            txtJumlahBijiDipakaiGram.Location = new Point(15, 155);
+            txtJumlahBijiDipakaiGram.Margin = new Padding(4, 4, 4, 4);
             txtJumlahBijiDipakaiGram.Name = "txtJumlahBijiDipakaiGram";
-            txtJumlahBijiDipakaiGram.Size = new Size(125, 27);
+            txtJumlahBijiDipakaiGram.Size = new Size(155, 31);
             txtJumlahBijiDipakaiGram.TabIndex = 3;
             txtJumlahBijiDipakaiGram.Text = "0";
             // 
             // txtHasilRoastingGram
             // 
-            txtHasilRoastingGram.Location = new Point(12, 190);
+            txtHasilRoastingGram.Location = new Point(15, 238);
+            txtHasilRoastingGram.Margin = new Padding(4, 4, 4, 4);
             txtHasilRoastingGram.Name = "txtHasilRoastingGram";
-            txtHasilRoastingGram.Size = new Size(125, 27);
+            txtHasilRoastingGram.Size = new Size(155, 31);
             txtHasilRoastingGram.TabIndex = 4;
             txtHasilRoastingGram.Text = "0";
             // 
@@ -92,97 +97,121 @@
             // 
             dtpTanggalBatch.CustomFormat = "dd-MM-yyyy";
             dtpTanggalBatch.Format = DateTimePickerFormat.Custom;
-            dtpTanggalBatch.Location = new Point(9, 314);
+            dtpTanggalBatch.Location = new Point(16, 393);
+            dtpTanggalBatch.Margin = new Padding(4, 4, 4, 4);
             dtpTanggalBatch.Name = "dtpTanggalBatch";
-            dtpTanggalBatch.Size = new Size(250, 27);
+            dtpTanggalBatch.Size = new Size(312, 31);
             dtpTanggalBatch.TabIndex = 5;
             // 
             // txtCatatan
             // 
-            txtCatatan.Location = new Point(9, 388);
+            txtCatatan.Location = new Point(11, 485);
+            txtCatatan.Margin = new Padding(4, 4, 4, 4);
             txtCatatan.Multiline = true;
             txtCatatan.Name = "txtCatatan";
             txtCatatan.PlaceholderText = "Profil rasa, durasi, suhu, dll.";
-            txtCatatan.Size = new Size(373, 50);
+            txtCatatan.Size = new Size(465, 62);
             txtCatatan.TabIndex = 6;
             // 
             // btnBatal
             // 
-            btnBatal.Location = new Point(501, 350);
+            btnBatal.BackColor = Color.FromArgb(79, 70, 229);
+            btnBatal.FlatStyle = FlatStyle.Flat;
+            btnBatal.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnBatal.ForeColor = SystemColors.ButtonHighlight;
+            btnBatal.Location = new Point(665, 438);
+            btnBatal.Margin = new Padding(4, 4, 4, 4);
             btnBatal.Name = "btnBatal";
-            btnBatal.Size = new Size(94, 29);
+            btnBatal.Size = new Size(118, 36);
             btnBatal.TabIndex = 7;
             btnBatal.Text = "Batal";
-            btnBatal.UseVisualStyleBackColor = true;
+            btnBatal.UseVisualStyleBackColor = false;
             // 
             // btnSimpan
             // 
-            btnSimpan.Location = new Point(675, 350);
+            btnSimpan.BackColor = Color.FromArgb(79, 70, 229);
+            btnSimpan.FlatStyle = FlatStyle.Flat;
+            btnSimpan.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnSimpan.ForeColor = SystemColors.ButtonHighlight;
+            btnSimpan.Location = new Point(812, 438);
+            btnSimpan.Margin = new Padding(4, 4, 4, 4);
             btnSimpan.Name = "btnSimpan";
-            btnSimpan.Size = new Size(94, 29);
+            btnSimpan.Size = new Size(118, 36);
             btnSimpan.TabIndex = 8;
             btnSimpan.Text = "Simpan";
-            btnSimpan.UseVisualStyleBackColor = true;
+            btnSimpan.UseVisualStyleBackColor = false;
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(12, 8);
+            label1.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label1.Location = new Point(15, 10);
+            label1.Margin = new Padding(4, 0, 4, 0);
             label1.Name = "label1";
-            label1.Size = new Size(125, 20);
+            label1.Size = new Size(161, 25);
             label1.TabIndex = 9;
             label1.Text = "Nama GreenBean";
             // 
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(12, 101);
+            label2.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label2.Location = new Point(15, 126);
+            label2.Margin = new Padding(4, 0, 4, 0);
             label2.Name = "label2";
-            label2.Size = new Size(139, 20);
+            label2.Size = new Size(182, 25);
             label2.TabIndex = 10;
             label2.Text = "Berat Masuk (gram)";
             // 
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(15, 168);
+            label3.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label3.Location = new Point(16, 209);
+            label3.Margin = new Padding(4, 0, 4, 0);
             label3.Name = "label3";
-            label3.Size = new Size(139, 20);
+            label3.Size = new Size(181, 25);
             label3.TabIndex = 11;
             label3.Text = "Berat Keluar (gram)";
             // 
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new Point(13, 225);
+            label4.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label4.Location = new Point(16, 283);
+            label4.Margin = new Padding(4, 0, 4, 0);
             label4.Name = "label4";
-            label4.Size = new Size(105, 20);
+            label4.Size = new Size(136, 25);
             label4.TabIndex = 12;
             label4.Text = "Level Roasting";
             // 
             // label5
             // 
             label5.AutoSize = true;
-            label5.Location = new Point(9, 291);
+            label5.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label5.Location = new Point(11, 364);
+            label5.Margin = new Padding(4, 0, 4, 0);
             label5.Name = "label5";
-            label5.Size = new Size(112, 20);
+            label5.Size = new Size(147, 25);
             label5.TabIndex = 13;
             label5.Text = "Waktu Roasting";
             // 
             // label6
             // 
             label6.AutoSize = true;
-            label6.Location = new Point(9, 365);
+            label6.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label6.Location = new Point(11, 456);
+            label6.Margin = new Padding(4, 0, 4, 0);
             label6.Name = "label6";
-            label6.Size = new Size(122, 20);
+            label6.Size = new Size(158, 25);
             label6.TabIndex = 14;
             label6.Text = "Catatan Roasting";
             // 
             // FormDialogBatchRoasting
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(992, 560);
             Controls.Add(label6);
             Controls.Add(label5);
             Controls.Add(label4);
@@ -199,6 +228,7 @@
             Controls.Add(cmbLevelRoasting);
             Controls.Add(cmbGreenBean);
             FormBorderStyle = FormBorderStyle.FixedDialog;
+            Margin = new Padding(4, 4, 4, 4);
             MaximizeBox = false;
             MinimizeBox = false;
             Name = "FormDialogBatchRoasting";

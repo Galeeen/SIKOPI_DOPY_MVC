@@ -32,26 +32,29 @@
             dgvBatchRoasting = new DataGridView();
             tabBahanBaku = new TabControl();
             tabGreenBean = new TabPage();
-            tabRoastBean = new TabPage();
             pnlHeaderGreenBean = new Panel();
+            tabRoastBean = new TabPage();
             dvgRoastBean = new DataGridView();
             ((System.ComponentModel.ISupportInitialize)dgvBatchRoasting).BeginInit();
             tabBahanBaku.SuspendLayout();
             tabGreenBean.SuspendLayout();
-            tabRoastBean.SuspendLayout();
             pnlHeaderGreenBean.SuspendLayout();
+            tabRoastBean.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dvgRoastBean).BeginInit();
             SuspendLayout();
             // 
             // btnTambahBatch
             // 
+            btnTambahBatch.BackColor = Color.FromArgb(79, 70, 229);
             btnTambahBatch.Cursor = Cursors.Hand;
-            btnTambahBatch.Location = new Point(647, 16);
+            btnTambahBatch.ForeColor = SystemColors.ButtonHighlight;
+            btnTambahBatch.Location = new Point(1067, 18);
+            btnTambahBatch.Margin = new Padding(4, 4, 4, 4);
             btnTambahBatch.Name = "btnTambahBatch";
-            btnTambahBatch.Size = new Size(134, 29);
+            btnTambahBatch.Size = new Size(180, 36);
             btnTambahBatch.TabIndex = 0;
             btnTambahBatch.Text = "+ Tambah Batch";
-            btnTambahBatch.UseVisualStyleBackColor = true;
+            btnTambahBatch.UseVisualStyleBackColor = false;
             btnTambahBatch.Click += btnTambahBatch_Click_1;
             // 
             // dgvBatchRoasting
@@ -61,13 +64,14 @@
             dgvBatchRoasting.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgvBatchRoasting.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvBatchRoasting.Dock = DockStyle.Bottom;
-            dgvBatchRoasting.Location = new Point(3, 54);
+            dgvBatchRoasting.Location = new Point(4, 228);
+            dgvBatchRoasting.Margin = new Padding(4, 4, 4, 4);
             dgvBatchRoasting.MultiSelect = false;
             dgvBatchRoasting.Name = "dgvBatchRoasting";
             dgvBatchRoasting.ReadOnly = true;
             dgvBatchRoasting.RowHeadersWidth = 51;
             dgvBatchRoasting.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgvBatchRoasting.Size = new Size(786, 360);
+            dgvBatchRoasting.Size = new Size(1264, 450);
             dgvBatchRoasting.TabIndex = 1;
             // 
             // tabBahanBaku
@@ -75,43 +79,48 @@
             tabBahanBaku.Controls.Add(tabGreenBean);
             tabBahanBaku.Controls.Add(tabRoastBean);
             tabBahanBaku.Dock = DockStyle.Fill;
+            tabBahanBaku.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             tabBahanBaku.Location = new Point(0, 0);
+            tabBahanBaku.Margin = new Padding(4, 4, 4, 4);
             tabBahanBaku.Name = "tabBahanBaku";
             tabBahanBaku.SelectedIndex = 0;
-            tabBahanBaku.Size = new Size(800, 450);
+            tabBahanBaku.Size = new Size(1280, 720);
             tabBahanBaku.TabIndex = 2;
             // 
             // tabGreenBean
             // 
             tabGreenBean.Controls.Add(pnlHeaderGreenBean);
             tabGreenBean.Controls.Add(dgvBatchRoasting);
-            tabGreenBean.Location = new Point(4, 29);
+            tabGreenBean.Location = new Point(4, 34);
+            tabGreenBean.Margin = new Padding(4, 4, 4, 4);
             tabGreenBean.Name = "tabGreenBean";
-            tabGreenBean.Padding = new Padding(3);
-            tabGreenBean.Size = new Size(792, 417);
+            tabGreenBean.Padding = new Padding(4, 4, 4, 4);
+            tabGreenBean.Size = new Size(1272, 682);
             tabGreenBean.TabIndex = 0;
             tabGreenBean.Text = "GreenBean";
             tabGreenBean.UseVisualStyleBackColor = true;
-            // 
-            // tabRoastBean
-            // 
-            tabRoastBean.Controls.Add(dvgRoastBean);
-            tabRoastBean.Location = new Point(4, 29);
-            tabRoastBean.Name = "tabRoastBean";
-            tabRoastBean.Padding = new Padding(3);
-            tabRoastBean.Size = new Size(792, 417);
-            tabRoastBean.TabIndex = 1;
-            tabRoastBean.Text = "Roast Bean";
-            tabRoastBean.UseVisualStyleBackColor = true;
             // 
             // pnlHeaderGreenBean
             // 
             pnlHeaderGreenBean.Controls.Add(btnTambahBatch);
             pnlHeaderGreenBean.Dock = DockStyle.Top;
-            pnlHeaderGreenBean.Location = new Point(3, 3);
+            pnlHeaderGreenBean.Location = new Point(4, 4);
+            pnlHeaderGreenBean.Margin = new Padding(4, 4, 4, 4);
             pnlHeaderGreenBean.Name = "pnlHeaderGreenBean";
-            pnlHeaderGreenBean.Size = new Size(786, 55);
+            pnlHeaderGreenBean.Size = new Size(1264, 69);
             pnlHeaderGreenBean.TabIndex = 2;
+            // 
+            // tabRoastBean
+            // 
+            tabRoastBean.Controls.Add(dvgRoastBean);
+            tabRoastBean.Location = new Point(4, 34);
+            tabRoastBean.Margin = new Padding(4, 4, 4, 4);
+            tabRoastBean.Name = "tabRoastBean";
+            tabRoastBean.Padding = new Padding(4, 4, 4, 4);
+            tabRoastBean.Size = new Size(1272, 682);
+            tabRoastBean.TabIndex = 1;
+            tabRoastBean.Text = "Roast Bean";
+            tabRoastBean.UseVisualStyleBackColor = true;
             // 
             // dvgRoastBean
             // 
@@ -120,29 +129,32 @@
             dvgRoastBean.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dvgRoastBean.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dvgRoastBean.Dock = DockStyle.Fill;
-            dvgRoastBean.Location = new Point(3, 3);
+            dvgRoastBean.Location = new Point(4, 4);
+            dvgRoastBean.Margin = new Padding(4, 4, 4, 4);
             dvgRoastBean.MultiSelect = false;
             dvgRoastBean.Name = "dvgRoastBean";
             dvgRoastBean.ReadOnly = true;
             dvgRoastBean.RowHeadersVisible = false;
             dvgRoastBean.RowHeadersWidth = 51;
             dvgRoastBean.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dvgRoastBean.Size = new Size(786, 411);
+            dvgRoastBean.Size = new Size(1264, 674);
             dvgRoastBean.TabIndex = 0;
             // 
             // FormBatchRoastingAdmin
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(1280, 720);
             Controls.Add(tabBahanBaku);
+            FormBorderStyle = FormBorderStyle.None;
+            Margin = new Padding(4, 4, 4, 4);
             Name = "FormBatchRoastingAdmin";
             Text = "Batch Roasting";
             ((System.ComponentModel.ISupportInitialize)dgvBatchRoasting).EndInit();
             tabBahanBaku.ResumeLayout(false);
             tabGreenBean.ResumeLayout(false);
-            tabRoastBean.ResumeLayout(false);
             pnlHeaderGreenBean.ResumeLayout(false);
+            tabRoastBean.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)dvgRoastBean).EndInit();
             ResumeLayout(false);
         }

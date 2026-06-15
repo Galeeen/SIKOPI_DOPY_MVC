@@ -96,5 +96,10 @@ namespace SIKOPI_DOPY_MVC.Views
             if (dgvRoastBean.Columns.Contains("catatan"))
                 dgvRoastBean.Columns["catatan"].HeaderText = "CATATAN";
         }
+
+        private void lblJudul_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
