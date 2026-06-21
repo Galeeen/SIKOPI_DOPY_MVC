@@ -12,4 +12,4 @@ namespace SIKOPI_DOPY_MVC.Models
         public string NamaPembeli { get; set; } = "";
         public decimal JumlahGram { get; set; }
     }
-}
+}   

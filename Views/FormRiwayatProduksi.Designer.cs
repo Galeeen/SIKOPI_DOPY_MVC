@@ -49,19 +49,17 @@
             pnlHeader.Controls.Add(lblJudul);
             pnlHeader.Dock = DockStyle.Top;
             pnlHeader.Location = new Point(0, 0);
-            pnlHeader.Margin = new Padding(4, 4, 4, 4);
             pnlHeader.Name = "pnlHeader";
-            pnlHeader.Size = new Size(1280, 112);
+            pnlHeader.Size = new Size(1024, 90);
             pnlHeader.TabIndex = 0;
             // 
             // lblSubJudul
             // 
             lblSubJudul.AutoSize = true;
             lblSubJudul.ForeColor = Color.White;
-            lblSubJudul.Location = new Point(34, 59);
-            lblSubJudul.Margin = new Padding(4, 0, 4, 0);
+            lblSubJudul.Location = new Point(27, 47);
             lblSubJudul.Name = "lblSubJudul";
-            lblSubJudul.Size = new Size(291, 25);
+            lblSubJudul.Size = new Size(240, 20);
             lblSubJudul.TabIndex = 1;
             lblSubJudul.Text = "Riwayat stok dan aktivitas produksi";
             // 
@@ -70,74 +68,65 @@
             lblJudul.AutoSize = true;
             lblJudul.Font = new Font("Segoe UI", 14F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lblJudul.ForeColor = Color.White;
-            lblJudul.Location = new Point(34, 21);
-            lblJudul.Margin = new Padding(4, 0, 4, 0);
+            lblJudul.Location = new Point(27, 17);
             lblJudul.Name = "lblJudul";
-            lblJudul.Size = new Size(121, 38);
+            lblJudul.Size = new Size(104, 32);
             lblJudul.TabIndex = 0;
             lblJudul.Text = "Riwayat";
             // 
             // pnlRingkasan
             // 
+            pnlRingkasan.BackColor = Color.Gainsboro;
             pnlRingkasan.Controls.Add(lblTotalAktivitas);
             pnlRingkasan.Controls.Add(lblJumlahBatch);
             pnlRingkasan.Controls.Add(lblRoastBeanMasuk);
             pnlRingkasan.Controls.Add(lblGreenBeanKeluar);
             pnlRingkasan.Dock = DockStyle.Top;
-            pnlRingkasan.Location = new Point(0, 112);
-            pnlRingkasan.Margin = new Padding(4, 4, 4, 4);
+            pnlRingkasan.Location = new Point(0, 90);
             pnlRingkasan.Name = "pnlRingkasan";
-            pnlRingkasan.Size = new Size(1280, 150);
+            pnlRingkasan.Size = new Size(1024, 120);
             pnlRingkasan.TabIndex = 1;
             // 
             // lblTotalAktivitas
             // 
-            lblTotalAktivitas.AutoSize = true;
-            lblTotalAktivitas.BorderStyle = BorderStyle.FixedSingle;
+            lblTotalAktivitas.BackColor = Color.White;
             lblTotalAktivitas.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblTotalAktivitas.Location = new Point(1000, 62);
-            lblTotalAktivitas.Margin = new Padding(4, 0, 4, 0);
+            lblTotalAktivitas.Location = new Point(783, 30);
             lblTotalAktivitas.Name = "lblTotalAktivitas";
-            lblTotalAktivitas.Size = new Size(133, 27);
+            lblTotalAktivitas.Size = new Size(200, 60);
             lblTotalAktivitas.TabIndex = 3;
             lblTotalAktivitas.Text = "Aktivitas\\r\\n0";
             lblTotalAktivitas.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // lblJumlahBatch
             // 
-            lblJumlahBatch.AutoSize = true;
-            lblJumlahBatch.BorderStyle = BorderStyle.FixedSingle;
+            lblJumlahBatch.BackColor = Color.White;
             lblJumlahBatch.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblJumlahBatch.Location = new Point(738, 62);
-            lblJumlahBatch.Margin = new Padding(4, 0, 4, 0);
+            lblJumlahBatch.Location = new Point(527, 30);
             lblJumlahBatch.Name = "lblJumlahBatch";
-            lblJumlahBatch.Size = new Size(107, 27);
+            lblJumlahBatch.Size = new Size(200, 60);
             lblJumlahBatch.TabIndex = 2;
             lblJumlahBatch.Text = "Batch\\r\\n0";
             lblJumlahBatch.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // lblRoastBeanMasuk
             // 
-            lblRoastBeanMasuk.AutoSize = true;
-            lblRoastBeanMasuk.BorderStyle = BorderStyle.FixedSingle;
+            lblRoastBeanMasuk.BackColor = Color.White;
             lblRoastBeanMasuk.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblRoastBeanMasuk.Location = new Point(402, 62);
-            lblRoastBeanMasuk.Margin = new Padding(4, 0, 4, 0);
+            lblRoastBeanMasuk.Location = new Point(278, 30);
             lblRoastBeanMasuk.Name = "lblRoastBeanMasuk";
-            lblRoastBeanMasuk.Size = new Size(182, 27);
+            lblRoastBeanMasuk.Size = new Size(200, 60);
             lblRoastBeanMasuk.TabIndex = 1;
             lblRoastBeanMasuk.Text = "lblRoastBeanMasuk";
             lblRoastBeanMasuk.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // lblGreenBeanKeluar
             // 
-            lblGreenBeanKeluar.AutoSize = true;
-            lblGreenBeanKeluar.BorderStyle = BorderStyle.FixedSingle;
+            lblGreenBeanKeluar.BackColor = Color.White;
             lblGreenBeanKeluar.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblGreenBeanKeluar.Location = new Point(94, 62);
-            lblGreenBeanKeluar.Margin = new Padding(4, 0, 4, 0);
+            lblGreenBeanKeluar.Location = new Point(27, 30);
             lblGreenBeanKeluar.Name = "lblGreenBeanKeluar";
-            lblGreenBeanKeluar.Size = new Size(171, 27);
+            lblGreenBeanKeluar.Size = new Size(200, 60);
             lblGreenBeanKeluar.TabIndex = 0;
             lblGreenBeanKeluar.Text = "GB Keluar\\r\\n0 Kg";
             lblGreenBeanKeluar.TextAlign = ContentAlignment.MiddleCenter;
@@ -149,34 +138,31 @@
             dgvRiwayatProduksi.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgvRiwayatProduksi.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvRiwayatProduksi.Dock = DockStyle.Fill;
-            dgvRiwayatProduksi.Location = new Point(0, 262);
-            dgvRiwayatProduksi.Margin = new Padding(4, 4, 4, 4);
+            dgvRiwayatProduksi.Location = new Point(0, 210);
             dgvRiwayatProduksi.MultiSelect = false;
             dgvRiwayatProduksi.Name = "dgvRiwayatProduksi";
             dgvRiwayatProduksi.ReadOnly = true;
             dgvRiwayatProduksi.RowHeadersVisible = false;
             dgvRiwayatProduksi.RowHeadersWidth = 51;
             dgvRiwayatProduksi.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgvRiwayatProduksi.Size = new Size(1280, 458);
+            dgvRiwayatProduksi.Size = new Size(1024, 366);
             dgvRiwayatProduksi.TabIndex = 2;
             // 
             // FormRiwayatProduksi
             // 
-            AutoScaleDimensions = new SizeF(10F, 25F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1280, 720);
+            ClientSize = new Size(1024, 576);
             Controls.Add(dgvRiwayatProduksi);
             Controls.Add(pnlRingkasan);
             Controls.Add(pnlHeader);
             FormBorderStyle = FormBorderStyle.None;
-            Margin = new Padding(4, 4, 4, 4);
             Name = "FormRiwayatProduksi";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Riwayat Produksi";
             pnlHeader.ResumeLayout(false);
             pnlHeader.PerformLayout();
             pnlRingkasan.ResumeLayout(false);
-            pnlRingkasan.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dgvRiwayatProduksi).EndInit();
             ResumeLayout(false);
         }

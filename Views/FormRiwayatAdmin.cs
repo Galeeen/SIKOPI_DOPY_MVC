@@ -195,5 +195,10 @@ namespace SIKOPI_DOPY_MVC.Views
             if (dgvTransaksiPenjualan.Columns.Contains("total_penjualan"))
                 dgvTransaksiPenjualan.Columns["total_penjualan"].HeaderText = "TOTAL";
         }
+
+        private void pnlRingkasan_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
     }
 }

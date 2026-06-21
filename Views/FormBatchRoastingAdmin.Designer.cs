@@ -115,6 +115,7 @@
             // 
             // pnlHeaderGreenBean
             // 
+            pnlHeaderGreenBean.BackColor = Color.FromArgb(79, 70, 229);
             pnlHeaderGreenBean.Controls.Add(btnTambahBatch);
             pnlHeaderGreenBean.Dock = DockStyle.Top;
             pnlHeaderGreenBean.Location = new Point(3, 3);
@@ -125,9 +126,10 @@
             // btnTambahBatch
             // 
             btnTambahBatch.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            btnTambahBatch.BackColor = Color.FromArgb(79, 70, 229);
+            btnTambahBatch.BackColor = Color.White;
             btnTambahBatch.Cursor = Cursors.Hand;
-            btnTambahBatch.ForeColor = SystemColors.ButtonHighlight;
+            btnTambahBatch.FlatStyle = FlatStyle.Flat;
+            btnTambahBatch.ForeColor = Color.Black;
             btnTambahBatch.Location = new Point(854, 14);
             btnTambahBatch.Name = "btnTambahBatch";
             btnTambahBatch.Size = new Size(144, 29);

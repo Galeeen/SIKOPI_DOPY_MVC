@@ -214,5 +214,10 @@ namespace SIKOPI_DOPY_MVC.Views
             if (dgvPenjualanTerbaru.Columns.Contains("nama_penjual"))
                 dgvPenjualanTerbaru.Columns["nama_penjual"].HeaderText = "PENJUAL";
         }
+
+        private void pnlHeader_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
     }
 }

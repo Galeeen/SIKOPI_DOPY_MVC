@@ -81,6 +81,7 @@
             // 
             // panel1
             // 
+            panel1.BackColor = Color.Gainsboro;
             panel1.Controls.Add(lblMenungguHarga);
             panel1.Controls.Add(lblTotalRoastBean);
             panel1.Controls.Add(lblHasilRoastingHariIni);
@@ -95,73 +96,67 @@
             // 
             // lblMenungguHarga
             // 
-            lblMenungguHarga.AutoSize = true;
-            lblMenungguHarga.BorderStyle = BorderStyle.FixedSingle;
+            lblMenungguHarga.BackColor = Color.White;
             lblMenungguHarga.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblMenungguHarga.Location = new Point(624, 95);
+            lblMenungguHarga.Location = new Point(649, 100);
             lblMenungguHarga.Name = "lblMenungguHarga";
-            lblMenungguHarga.Size = new Size(225, 22);
+            lblMenungguHarga.Size = new Size(200, 60);
             lblMenungguHarga.TabIndex = 6;
             lblMenungguHarga.Text = "Produk Menunggu Harga\\r\\n0";
             lblMenungguHarga.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // lblTotalRoastBean
             // 
-            lblTotalRoastBean.AutoSize = true;
-            lblTotalRoastBean.BorderStyle = BorderStyle.FixedSingle;
+            lblTotalRoastBean.BackColor = Color.White;
             lblTotalRoastBean.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblTotalRoastBean.Location = new Point(328, 95);
+            lblTotalRoastBean.Location = new Point(343, 100);
             lblTotalRoastBean.Name = "lblTotalRoastBean";
-            lblTotalRoastBean.Size = new Size(215, 22);
+            lblTotalRoastBean.Size = new Size(200, 60);
             lblTotalRoastBean.TabIndex = 5;
             lblTotalRoastBean.Text = "Total Stok Roast Bean\\r\\n0 g";
             lblTotalRoastBean.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // lblHasilRoastingHariIni
             // 
-            lblHasilRoastingHariIni.AutoSize = true;
-            lblHasilRoastingHariIni.BorderStyle = BorderStyle.FixedSingle;
+            lblHasilRoastingHariIni.BackColor = Color.White;
             lblHasilRoastingHariIni.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblHasilRoastingHariIni.Location = new Point(24, 95);
+            lblHasilRoastingHariIni.Location = new Point(41, 100);
             lblHasilRoastingHariIni.Name = "lblHasilRoastingHariIni";
-            lblHasilRoastingHariIni.Size = new Size(217, 22);
+            lblHasilRoastingHariIni.Size = new Size(200, 60);
             lblHasilRoastingHariIni.TabIndex = 4;
             lblHasilRoastingHariIni.Text = "Hasil Roasting Hari Ini\\r\\n0 g";
             lblHasilRoastingHariIni.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // lblGreenBeanHariIni
             // 
-            lblGreenBeanHariIni.AutoSize = true;
-            lblGreenBeanHariIni.BorderStyle = BorderStyle.FixedSingle;
+            lblGreenBeanHariIni.BackColor = Color.White;
             lblGreenBeanHariIni.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblGreenBeanHariIni.Location = new Point(624, 32);
+            lblGreenBeanHariIni.Location = new Point(649, 15);
             lblGreenBeanHariIni.Name = "lblGreenBeanHariIni";
-            lblGreenBeanHariIni.Size = new Size(254, 22);
+            lblGreenBeanHariIni.Size = new Size(200, 60);
             lblGreenBeanHariIni.TabIndex = 2;
             lblGreenBeanHariIni.Text = "Green Bean Dipakai Hari Ini\\r\\n0 g";
             lblGreenBeanHariIni.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // lblBatchHariIni
             // 
-            lblBatchHariIni.AutoSize = true;
-            lblBatchHariIni.BorderStyle = BorderStyle.FixedSingle;
+            lblBatchHariIni.BackColor = Color.White;
             lblBatchHariIni.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lblBatchHariIni.ForeColor = Color.Black;
-            lblBatchHariIni.Location = new Point(358, 32);
+            lblBatchHariIni.Location = new Point(343, 15);
             lblBatchHariIni.Name = "lblBatchHariIni";
-            lblBatchHariIni.Size = new Size(144, 22);
+            lblBatchHariIni.Size = new Size(200, 60);
             lblBatchHariIni.TabIndex = 1;
             lblBatchHariIni.Text = "Batch Hari Ini\\r\\n0";
             lblBatchHariIni.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // lblTotalBatch
             // 
-            lblTotalBatch.AutoSize = true;
-            lblTotalBatch.BorderStyle = BorderStyle.FixedSingle;
+            lblTotalBatch.BackColor = Color.White;
             lblTotalBatch.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblTotalBatch.Location = new Point(54, 32);
+            lblTotalBatch.Location = new Point(41, 15);
             lblTotalBatch.Name = "lblTotalBatch";
-            lblTotalBatch.Size = new Size(128, 22);
+            lblTotalBatch.Size = new Size(200, 60);
             lblTotalBatch.TabIndex = 0;
             lblTotalBatch.Text = "Total Batch\\r\\n0";
             lblTotalBatch.TextAlign = ContentAlignment.MiddleCenter;
@@ -219,7 +214,6 @@
             pnlHeader.ResumeLayout(false);
             pnlHeader.PerformLayout();
             panel1.ResumeLayout(false);
-            panel1.PerformLayout();
             panel2.ResumeLayout(false);
             panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dgvBatchTerbaru).EndInit();

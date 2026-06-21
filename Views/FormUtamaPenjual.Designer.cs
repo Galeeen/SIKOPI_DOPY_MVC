@@ -67,7 +67,7 @@
             pictureBox1.BackgroundImage = (Image)resources.GetObject("pictureBox1.BackgroundImage");
             pictureBox1.BackgroundImageLayout = ImageLayout.Zoom;
             pictureBox1.Location = new Point(20, 23);
-            pictureBox1.Margin = new Padding(2, 2, 2, 2);
+            pictureBox1.Margin = new Padding(2);
             pictureBox1.Name = "pictureBox1";
             pictureBox1.Size = new Size(68, 54);
             pictureBox1.TabIndex = 10;
@@ -88,12 +88,16 @@
             // 
             // btnKeluar
             // 
+            btnKeluar.BackColor = Color.FromArgb(79, 70, 229);
+            btnKeluar.FlatStyle = FlatStyle.Flat;
+            btnKeluar.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnKeluar.ForeColor = SystemColors.ButtonHighlight;
             btnKeluar.Location = new Point(20, 580);
             btnKeluar.Name = "btnKeluar";
-            btnKeluar.Size = new Size(160, 35);
+            btnKeluar.Size = new Size(133, 29);
             btnKeluar.TabIndex = 6;
             btnKeluar.Text = "Keluar";
-            btnKeluar.UseVisualStyleBackColor = true;
+            btnKeluar.UseVisualStyleBackColor = false;
             // 
             // lblRole
             // 
