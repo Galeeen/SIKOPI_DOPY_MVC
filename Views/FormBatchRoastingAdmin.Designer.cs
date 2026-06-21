@@ -77,7 +77,7 @@
             tabGreenBean.Controls.Add(dgvGreenBean);
             tabGreenBean.Location = new Point(4, 29);
             tabGreenBean.Name = "tabGreenBean";
-            tabGreenBean.Padding = new Padding(3, 3, 3, 3);
+            tabGreenBean.Padding = new Padding(3);
             tabGreenBean.Size = new Size(1016, 543);
             tabGreenBean.TabIndex = 0;
             tabGreenBean.Text = "GreenBean";
@@ -85,11 +85,11 @@
             // 
             // tabRoastBean
             // 
-            tabRoastBean.Controls.Add(pnlHeaderGreenBean);
             tabRoastBean.Controls.Add(dgvBatchRoasting);
+            tabRoastBean.Controls.Add(pnlHeaderGreenBean);
             tabRoastBean.Location = new Point(4, 29);
             tabRoastBean.Name = "tabRoastBean";
-            tabRoastBean.Padding = new Padding(3, 3, 3, 3);
+            tabRoastBean.Padding = new Padding(3);
             tabRoastBean.Size = new Size(1016, 543);
             tabRoastBean.TabIndex = 1;
             tabRoastBean.Text = "Roast Bean";
@@ -102,14 +102,14 @@
             dgvBatchRoasting.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgvBatchRoasting.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvBatchRoasting.Dock = DockStyle.Fill;
-            dgvBatchRoasting.Location = new Point(3, 3);
+            dgvBatchRoasting.Location = new Point(3, 63);
             dgvBatchRoasting.MultiSelect = false;
             dgvBatchRoasting.Name = "dgvBatchRoasting";
             dgvBatchRoasting.ReadOnly = true;
             dgvBatchRoasting.RowHeadersVisible = false;
             dgvBatchRoasting.RowHeadersWidth = 51;
             dgvBatchRoasting.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgvBatchRoasting.Size = new Size(1010, 537);
+            dgvBatchRoasting.Size = new Size(1010, 477);
             dgvBatchRoasting.TabIndex = 0;
             dgvBatchRoasting.CellContentClick += dvgRoastBean_CellContentClick;
             // 
@@ -119,11 +119,12 @@
             pnlHeaderGreenBean.Dock = DockStyle.Top;
             pnlHeaderGreenBean.Location = new Point(3, 3);
             pnlHeaderGreenBean.Name = "pnlHeaderGreenBean";
-            pnlHeaderGreenBean.Size = new Size(1010, 55);
+            pnlHeaderGreenBean.Size = new Size(1010, 60);
             pnlHeaderGreenBean.TabIndex = 3;
             // 
             // btnTambahBatch
             // 
+            btnTambahBatch.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             btnTambahBatch.BackColor = Color.FromArgb(79, 70, 229);
             btnTambahBatch.Cursor = Cursors.Hand;
             btnTambahBatch.ForeColor = SystemColors.ButtonHighlight;
@@ -157,8 +158,8 @@
         private TabControl tabBahanBaku;
         private TabPage tabGreenBean;
         private TabPage tabRoastBean;
-        private DataGridView dgvBatchRoasting;
         private Panel pnlHeaderGreenBean;
         private Button btnTambahBatch;
+        private DataGridView dgvBatchRoasting;
     }
 }

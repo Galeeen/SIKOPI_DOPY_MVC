@@ -51,60 +51,61 @@ namespace SIKOPI_DOPY_MVC.Views
             }
         }
 
-      
+
         private void AturKolomGrid()
         {
-            if (dgvGreenBean.Columns.Count == 0)
+            if (dgvBatchRoasting.Columns.Count == 0)
                 return;
 
-            dgvGreenBean.ReadOnly = true;
-            dgvGreenBean.AllowUserToAddRows = false;
-            dgvGreenBean.AllowUserToDeleteRows = false;
-            dgvGreenBean.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgvGreenBean.MultiSelect = false;
-            dgvGreenBean.RowHeadersVisible = false;
-            dgvGreenBean.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dgvBatchRoasting.ReadOnly = true;
+            dgvBatchRoasting.AllowUserToAddRows = false;
+            dgvBatchRoasting.AllowUserToDeleteRows = false;
+            dgvBatchRoasting.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgvBatchRoasting.MultiSelect = false;
+            dgvBatchRoasting.RowHeadersVisible = false;
+            dgvBatchRoasting.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
 
-            if (dgvGreenBean.Columns.Contains("id_batch"))
-                dgvGreenBean.Columns["id_batch"].Visible = false;
+            if (dgvBatchRoasting.Columns.Contains("id_batch"))
+                dgvBatchRoasting.Columns["id_batch"].Visible = false;
 
-            if (dgvGreenBean.Columns.Contains("kode_batch"))
-                dgvGreenBean.Columns["kode_batch"].HeaderText = "KODE BATCH";
+            if (dgvBatchRoasting.Columns.Contains("kode_batch"))
+                dgvBatchRoasting.Columns["kode_batch"].HeaderText = "KODE BATCH";
 
-            if (dgvGreenBean.Columns.Contains("green_bean"))
+            if (dgvBatchRoasting.Columns.Contains("green_bean"))
+                dgvBatchRoasting.Columns["green_bean"].HeaderText = "GREEN BEAN";
+
+            if (dgvBatchRoasting.Columns.Contains("jumlah_biji_dipakai_gram"))
             {
-                dgvGreenBean.Columns["green_bean"].HeaderText = "GREEN BEAN";
+                dgvBatchRoasting.Columns["jumlah_biji_dipakai_gram"].HeaderText = "BIJI MASUK (GRAM)";
+                dgvBatchRoasting.Columns["jumlah_biji_dipakai_gram"].DefaultCellStyle.Format = "N0";
             }
 
-            if (dgvGreenBean.Columns.Contains("jumlah_biji_dipakai_gram"))
+            if (dgvBatchRoasting.Columns.Contains("hasil_roasting_gram"))
             {
-                dgvGreenBean.Columns["jumlah_biji_dipakai_gram"].HeaderText = "BIJI MASUK (GRAM)";
-                dgvGreenBean.Columns["jumlah_biji_dipakai_gram"].DefaultCellStyle.Format = "N0";
+                dgvBatchRoasting.Columns["hasil_roasting_gram"].HeaderText = "HASIL ROASTING (GRAM)";
+                dgvBatchRoasting.Columns["hasil_roasting_gram"].DefaultCellStyle.Format = "N0";
             }
 
-            if (dgvGreenBean.Columns.Contains("hasil_roasting_gram"))
+            if (dgvBatchRoasting.Columns.Contains("level_roasting"))
+                dgvBatchRoasting.Columns["level_roasting"].HeaderText = "LEVEL ROASTING";
+
+            if (dgvBatchRoasting.Columns.Contains("tanggal_batch"))
             {
-                dgvGreenBean.Columns["hasil_roasting_gram"].HeaderText = "BERAT KELUAR (GRAM)";
-                dgvGreenBean.Columns["hasil_roasting_gram"].DefaultCellStyle.Format = "N0";
+                dgvBatchRoasting.Columns["tanggal_batch"].HeaderText = "TANGGAL BATCH";
+                dgvBatchRoasting.Columns["tanggal_batch"].DefaultCellStyle.Format = "dd/MM/yyyy";
             }
 
-            if (dgvGreenBean.Columns.Contains("level_roasting"))
-                dgvGreenBean.Columns["level_roasting"].HeaderText = "LEVEL ROASTING";
-
-            if (dgvGreenBean.Columns.Contains("tanggal_batch"))
-                dgvGreenBean.Columns["tanggal_batch"].HeaderText = "TANGGAL";
-
-            if (dgvGreenBean.Columns.Contains("catatan"))
-                dgvGreenBean.Columns["catatan"].HeaderText = "CATATAN";
+            if (dgvBatchRoasting.Columns.Contains("catatan"))
+                dgvBatchRoasting.Columns["catatan"].HeaderText = "CATATAN";
         }
 
         private void TambahKolomAksi()
         {
-            if (dgvGreenBean.Columns.Contains("colEdit"))
-                dgvGreenBean.Columns.Remove("colEdit");
+            if (dgvBatchRoasting.Columns.Contains("colEdit"))
+                dgvBatchRoasting.Columns.Remove("colEdit");
 
-            if (dgvGreenBean.Columns.Contains("colHapus"))
-                dgvGreenBean.Columns.Remove("colHapus");
+            if (dgvBatchRoasting.Columns.Contains("colHapus"))
+                dgvBatchRoasting.Columns.Remove("colHapus");
 
             var colEdit = new DataGridViewButtonColumn
             {
@@ -126,11 +127,11 @@ namespace SIKOPI_DOPY_MVC.Views
                 Width = 80
             };
 
-            dgvGreenBean.Columns.Add(colEdit);
-            dgvGreenBean.Columns.Add(colHapus);
+            dgvBatchRoasting.Columns.Add(colEdit);
+            dgvBatchRoasting.Columns.Add(colHapus);
 
-            dgvGreenBean.Columns["colEdit"].DisplayIndex = dgvGreenBean.Columns.Count - 2;
-            dgvGreenBean.Columns["colHapus"].DisplayIndex = dgvGreenBean.Columns.Count - 1;
+            dgvBatchRoasting.Columns["colEdit"].DisplayIndex = dgvBatchRoasting.Columns.Count - 2;
+            dgvBatchRoasting.Columns["colHapus"].DisplayIndex = dgvBatchRoasting.Columns.Count - 1;
         }
 
         private void btnTambahBatch_Click(object sender, EventArgs e)
@@ -148,12 +149,12 @@ namespace SIKOPI_DOPY_MVC.Views
             if (e.RowIndex < 0 || e.ColumnIndex < 0)
                 return;
 
-            string namaKolom = dgvGreenBean.Columns[e.ColumnIndex].Name;
+            string namaKolom = dgvBatchRoasting.Columns[e.ColumnIndex].Name;
 
             if (namaKolom != "colEdit" && namaKolom != "colHapus")
                 return;
 
-            if (!dgvGreenBean.Columns.Contains("id_batch"))
+            if (!dgvBatchRoasting.Columns.Contains("id_batch"))
             {
                 MessageBox.Show(
                     "Kolom id_batch tidak ditemukan. Periksa query AmbilSemua di RepositoriBatchRoasting.",
@@ -165,7 +166,7 @@ namespace SIKOPI_DOPY_MVC.Views
             }
 
             int idBatch = Convert.ToInt32(
-                dgvGreenBean.Rows[e.RowIndex].Cells["id_batch"].Value
+                dgvBatchRoasting.Rows[e.RowIndex].Cells["id_batch"].Value
             );
 
             if (namaKolom == "colEdit")
@@ -307,6 +308,11 @@ namespace SIKOPI_DOPY_MVC.Views
         }
 
         private void dvgRoastBean_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void pnlHeaderGreenBean_Paint(object sender, PaintEventArgs e)
         {
 
         }
